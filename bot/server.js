@@ -41,6 +41,21 @@ app.use('/api/auth', authRoutes);
 // Business API routes
 app.use('/api/business', businessRoutes);
 
+// Chat API proxy to backend
+app.post('/api/chat', async (req, res) => {
+  try {
+    const axios = require('axios');
+    const backendUrl = 'http://localhost:8000/api/chat';
+    const response = await axios.post(backendUrl, req.body, {
+      headers: req.headers,
+    });
+    res.status(response.status).json(response.data);
+  } catch (error) {
+    console.error('Chat proxy error:', error.message);
+    res.status(502).json({ error: 'Backend service unavailable' });
+  }
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ 

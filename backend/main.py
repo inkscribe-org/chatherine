@@ -1377,7 +1377,7 @@ async def create_business_hours(hours: BusinessHoursModel):
 
 
 @app.put("/api/business-hours/{hours_id}", response_model=BusinessHoursModel)
-async def update_business_hours(hours_id: int, hours: BusinessHoursModel):
+async def update_business_hours_endpoint(hours_id: int, hours: BusinessHoursModel):
     async with async_session() as session:
         result = await session.execute(
             select(BusinessHours).where(BusinessHours.id == hours_id)
@@ -1550,29 +1550,8 @@ async def chat(chat_message: ChatMessage):
 
             # Bind tools if customer_id is provided
             if chat_message.customer_id:
-                tools = [
-                    get_customer_services,
-                    get_customer_appointments,
-                    get_customer_schedule,
-                    get_customer_revenue,
-                    get_customer_business_hours,
-                    get_customer_inventory,
-                    get_all_customers,
-                    get_customer_business_facts,
-                    search_business_facts,
-                    add_business_fact,
-                    list_business_services,
-                    search_business_services,
-                    add_business_service,
-                    store_unanswered_question,
-                    update_business_hours,
-                    update_service_price_chat,
-                    update_business_description_chat,
-                    update_business_location_chat,
-                    add_staff_member_chat,
-                    update_appointment_availability_chat,
-                ]
-                llm_with_tools = llm.bind_tools(tools)
+                # Temporarily disable tools to test basic LLM functionality
+                llm_with_tools = llm
 
                 system_content = f"""You are a helpful assistant for managing a business. You have access to the customer's data via tools.
 

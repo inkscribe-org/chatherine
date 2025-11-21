@@ -89,14 +89,22 @@ function sendMessage() {
     showLoadingIndicator();
     
     // Call backend API
+    const requestBody = {
+        message,
+        customer_id: 6 // Bella Vista Restaurant customer ID
+    };
+
+    // Only include API key if it's not the placeholder
+    const apiKey = 'YOUR_GOOGLE_API_KEY_HERE';
+    if (apiKey !== 'YOUR_GOOGLE_API_KEY_HERE') {
+        requestBody.api_key = apiKey;
+    }
+
     fetch('http://localhost:8000/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            message,
-            customer_id: 6, // Bella Vista Restaurant customer ID
-            api_key: 'YOUR_GOOGLE_API_KEY_HERE' // Replace with your actual Google Gemini API key
-        })
+        body: JSON.stringify(requestBody)
+    })
     })
     .then(response => response.json())
     .then(data => {
