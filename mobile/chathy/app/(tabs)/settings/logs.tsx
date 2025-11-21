@@ -3,30 +3,10 @@ import { View, ScrollView } from 'react-native';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
 import { TrendingUp, Activity, BarChart3 } from 'lucide-react-native';
+import { useEffect, useState } from 'react';
+import { api, Log } from '@/lib/api';
 
-const ACTION_LOG = [
-  {
-    id: '1',
-    action: 'Price Update',
-    details: 'Full Facial price changed to $120',
-    timestamp: '2 hours ago',
-    triggered: ['Updated website', 'Synced with booking system'],
-  },
-  {
-    id: '2',
-    action: 'Schedule Change',
-    details: 'Business closed for staff training',
-    timestamp: '1 day ago',
-    triggered: ['Sent customer notifications', 'Updated calendar'],
-  },
-  {
-    id: '3',
-    action: 'New Service Added',
-    details: 'Express Manicure added to menu',
-    timestamp: '2 days ago',
-    triggered: ['Updated online booking', 'Synced with POS'],
-  },
-];
+// Removed sample ACTION_LOG, now fetched from API
 
 const ANALYTICS = {
   inquiriesPerDay: 12,
@@ -41,6 +21,23 @@ const ANALYTICS = {
 };
 
 export default function LogsScreen() {
+  const [logs, setLogs] = useState<Log[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLogs = async () => {
+      try {
+        const fetchedLogs = await api.logs.getAll();
+        setLogs(fetchedLogs);
+      } catch (error) {
+        console.error('Failed to fetch logs:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLogs();
+  }, []);
+
   return (
     <>
       <Stack.Screen options={{ title: 'Logs & Insights' }} />
@@ -91,24 +88,21 @@ export default function LogsScreen() {
               <CardTitle>Action Log</CardTitle>
             </CardHeader>
             <CardContent>
-              <View className="space-y-4">
-                {ACTION_LOG.map((log) => (
-                  <View key={log.id} className="border-l-2 border-primary pl-4">
-                    <View className="flex-row justify-between items-start mb-1">
-                      <Text className="font-medium">{log.action}</Text>
-                      <Text variant="muted" className="text-sm">{log.timestamp}</Text>
+              {loading ? (
+                <Text>Loading logs...</Text>
+              ) : (
+                <View className="space-y-4">
+                  {logs.map((log) => (
+                    <View key={log.id} className="border-l-2 border-primary pl-4">
+                      <View className="flex-row justify-between items-start mb-1">
+                        <Text className="font-medium">{log.action}</Text>
+                        <Text variant="muted" className="text-sm">{new Date(log.timestamp).toLocaleString()}</Text>
+                      </View>
+                      <Text variant="muted" className="text-sm mb-2">{log.details}</Text>
                     </View>
-                    <Text variant="muted" className="text-sm mb-2">{log.details}</Text>
-                    <View className="space-y-1">
-                      {log.triggered.map((trigger, index) => (
-                        <Text key={index} variant="muted" className="text-xs">
-                          • {trigger}
-                        </Text>
-                      ))}
-                    </View>
-                  </View>
-                ))}
-              </View>
+                  ))}
+                </View>
+              )}
             </CardContent>
           </Card>
         </View>

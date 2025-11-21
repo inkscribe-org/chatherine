@@ -6,27 +6,30 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const telegramRoutes = require('./routes/telegram');
+console.log('Telegram routes loaded:', typeof telegramRoutes);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security middleware
-app.use(helmet());
+// Security middleware (temporarily disabled for testing)
+// app.use(helmet());
 app.use(cors());
-
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
-});
-app.use('/webhook/', limiter);
 
 // Body parsing middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Rate limiting (temporarily disabled for testing)
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100 // limit each IP to 100 requests per windowMs
+// });
+// app.use('/webhook/', limiter);
+
+
+
 // Telegram webhook route
-app.post('/webhook/telegram', telegramRoutes);
+app.use('/webhook/telegram', telegramRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

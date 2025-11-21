@@ -4,6 +4,7 @@ import { ChatInput } from '@/components/ui/chat-input';
 import { MessageBubble } from '@/components/ui/message-bubble';
 import { Card, CardContent } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
+import { api } from '@/lib/api';
 
 type Message = {
   id: string;
@@ -17,88 +18,36 @@ type Message = {
   };
 };
 
-const SAMPLE_MESSAGES: Message[] = [
-  {
-    id: '1',
-    text: 'Increase full facial from $100 to $120.',
-    isSent: true,
-    timestamp: '10:30 AM',
-    chathyResponse: {
-      understood: 'Update service price',
-      applied: 'Full Facial price changed to $120',
-      actions: ['Updated pricing in system', 'Notified team members'],
-    },
-  },
-  {
-    id: '2',
-    text: 'Got it! Updated the service "Full Facial" to $120.',
-    isSent: false,
-    timestamp: '10:31 AM',
-  },
-  {
-    id: '3',
-    text: 'Close tomorrow for staff training.',
-    isSent: true,
-    timestamp: '2:15 PM',
-    chathyResponse: {
-      understood: 'Schedule closure',
-      applied: 'Business closed tomorrow for staff training',
-      actions: ['Updated calendar', 'Sent notifications to customers with appointments'],
-    },
-  },
-  {
-    id: '4',
-    text: 'Understood! I\'ve closed the business tomorrow and notified affected customers.',
-    isSent: false,
-    timestamp: '2:16 PM',
-  },
-  {
-    id: '5',
-    text: 'Add new service: Express Manicure $35.',
-    isSent: true,
-    timestamp: '4:20 PM',
-    chathyResponse: {
-      understood: 'Add new service',
-      applied: 'Added "Express Manicure" for $35',
-      actions: ['Created service in menu', 'Updated online booking'],
-    },
-  },
-  {
-    id: '6',
-    text: 'Done! "Express Manicure" has been added to your services at $35.',
-    isSent: false,
-    timestamp: '4:21 PM',
-  },
-];
-
 export default function ChatScreen() {
-  const [messages, setMessages] = React.useState<Message[]>(SAMPLE_MESSAGES);
+  const [messages, setMessages] = React.useState<Message[]>([]);
 
-  const handleSendMessage = (text: string) => {
+  const handleSendMessage = async (text: string) => {
     const newMessage: Message = {
       id: Date.now().toString(),
       text,
       isSent: true,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      // Mock Chathy response
-      chathyResponse: {
-        understood: 'Processing your request...',
-        applied: 'Update applied successfully',
-        actions: ['Synced with calendar', 'Updated customer notifications'],
-      },
     };
     setMessages(prev => [...prev, newMessage]);
 
-    // Simulate Chathy response after a delay
-    setTimeout(() => {
+    try {
+      const data = await api.chat.sendMessage(text);
       const chathyReply: Message = {
         id: (Date.now() + 1).toString(),
-        text: `Got it! ${newMessage.chathyResponse?.applied}`,
+        text: data.response,
         isSent: false,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages(prev => [...prev, chathyReply]);
-    }, 1000);
+    } catch (error) {
+      const errorReply: Message = {
+        id: (Date.now() + 1).toString(),
+        text: 'Sorry, I couldn\'t process your request. Please try again.',
+        isSent: false,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      };
+      setMessages(prev => [...prev, errorReply]);
+    }
   };
 
   const renderMessage = ({ item }: { item: Message }) => (
