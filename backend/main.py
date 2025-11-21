@@ -7,7 +7,7 @@ from sqlalchemy import Column, Integer, String, select
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 import os
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_ibm import ChatWatsonx
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.tools import tool
 from dotenv import load_dotenv
@@ -173,8 +173,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Gemini AI setup
-google_api_key = os.environ.get("GOOGLE_API_KEY")
+# Watson X AI setup
+watsonx_api_key = os.environ.get("WATSONX_API_KEY")
 
 
 @app.on_event("startup")
@@ -1536,15 +1536,17 @@ async def update_unanswered_question(
 async def chat(chat_message: ChatMessage):
     response_text = ""
     # Use API key from request if provided, otherwise fall back to environment variable
-    api_key = chat_message.api_key or google_api_key
+    api_key = chat_message.api_key or watsonx_api_key
     if not api_key:
         # Mock response for testing
         response_text = f"Got it! I've processed your request: '{chat_message.message}'. This is a mock response since LLM credentials are not configured."
     else:
         try:
-            llm = ChatGoogleGenerativeAI(
-                model="gemini-2.5-flash",
-                api_key=api_key,
+            llm = ChatWatsonx(
+                model="meta-llama/llama-3-70b-instruct",
+                watsonx_api_key=api_key,
+                watsonx_url="https://us-south.ml.cloud.ibm.com",
+                watsonx_project_id="your-project-id",
                 max_tokens=512,
             )
 
