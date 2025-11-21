@@ -15,31 +15,31 @@ function toggleChat() {
     }
 }
 
-// Fake API responses
-const fakeAPIResponses = {
+// Restaurant-specific API responses
+const restaurantResponses = {
+    "reservation": {
+        text: "I'd be happy to help you make a reservation! For tonight at 7 PM, I can book a table for 2 people. Would you like me to proceed with this reservation?",
+        action: "Reservation request received"
+    },
+    "menu": {
+        text: "Our most popular dishes include the Grilled Salmon with lemon butter sauce, Filet Mignon with red wine reduction, and our signature Truffle Mushroom Risotto. We also have excellent vegetarian options like the Eggplant Parmesan and Quinoa Stuffed Bell Peppers.",
+        action: "Menu information provided"
+    },
     "hours": {
-        text: "I've updated your business hours to 9:00 AM - 5:00 PM Monday through Thursday, and 9:00 AM - 4:00 PM on Saturday. Sunday remains closed.",
-        action: "Updated business hours"
+        text: "We're open today from 11:00 AM to 10:00 PM. Our regular hours are:\nMonday-Thursday: 11 AM - 10 PM\nFriday-Saturday: 11 AM - 11 PM\nSunday: 12 PM - 9 PM",
+        action: "Hours information provided"
     },
-    "price": {
-        text: "I've updated the service pricing. The new rates are now reflected in your service menu and booking system.",
-        action: "Updated service pricing"
+    "vegetarian": {
+        text: "Yes! We have several delicious vegetarian options including our Eggplant Parmesan, Quinoa Stuffed Bell Peppers, Margherita Pizza, and a fresh Mediterranean Bowl. All can be prepared vegan upon request.",
+        action: "Dietary information provided"
     },
-    "service": {
-        text: "I've added the new service to your menu. It's now available for booking across all your channels.",
-        action: "Added new service"
-    },
-    "closed": {
-        text: "I've marked your business as closed for the specified date. Customers will be informed of your unavailability.",
-        action: "Updated closure schedule"
-    },
-    "phone": {
-        text: "I've updated your business phone number. This change is reflected on your website and in all customer communications.",
-        action: "Updated phone number"
+    "location": {
+        text: "We're located at 123 Gourmet Street, Downtown District. Free parking is available in the rear, and we're also accessible by public transit (Metro Line 2, Gourmet Station).",
+        action: "Location information provided"
     },
     "default": {
-        text: "I understand you want to make an update. Could you be more specific? You can ask me to:\n• Update hours ('Change my hours to 9-5')\n• Change prices ('Increase facial to $120')\n• Add services ('Add deep tissue massage for $150')\n• Mark closures ('Closed tomorrow for holiday')",
-        action: "Requested clarification"
+        text: "Welcome to Bella Vista! I'm your AI dining concierge. I can help you with:\n• Making reservations ('Book a table for 2 at 7 PM')\n• Menu information ('What are your popular dishes?')\n• Hours and location ('When are you open?')\n• Dietary options ('Do you have vegetarian meals?')",
+        action: "Restaurant assistance offered"
     }
 };
 
@@ -69,10 +69,10 @@ function sendMessage() {
     const userMessage = document.createElement('div');
     userMessage.className = 'flex items-start space-x-3 justify-end';
     userMessage.innerHTML = `
-        <div class="bg-blue-600 text-white p-3 max-w-[80%] message border border-blue-600">
+        <div class="bg-purple-600 text-white p-3 max-w-[80%] message border border-purple-600 rounded-lg">
             <p class="text-sm">${message}</p>
         </div>
-        <div class="w-8 h-8 bg-gray-300 rounded-sm flex items-center justify-center flex-shrink-0">
+        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
             <i class="fas fa-user text-gray-600 text-xs"></i>
         </div>
     `;
@@ -88,15 +88,31 @@ function sendMessage() {
     // Show loading indicator
     showLoadingIndicator();
     
-    // Simulate API call with loading - 5 seconds for realistic feel
-    setTimeout(() => {
-        console.log('Timeout reached, removing loading indicator');
+    // Call backend API
+    fetch('http://localhost:8000/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            message,
+            customer_id: 6, // Bella Vista Restaurant customer ID
+            api_key: 'YOUR_GOOGLE_API_KEY_HERE' // Replace with your actual Google Gemini API key
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Backend response:', data);
         removeLoadingIndicator();
-        input.disabled = false; // Re-enable input
-        input.focus(); // Focus back on input
-        const aiResponse = generateAIResponse(message);
-        addAIMessage(aiResponse);
-    }, 5000); // 5 second delay to simulate API call
+        input.disabled = false;
+        input.focus();
+        addAIMessage({ text: data.response, action: 'AI Response' });
+    })
+    .catch(error => {
+        console.error('Error calling backend:', error);
+        removeLoadingIndicator();
+        input.disabled = false;
+        input.focus();
+        addAIMessage({ text: 'Sorry, I encountered an error. Please try again.', action: 'Error' });
+    });
 }
 
 function showLoadingIndicator() {
@@ -114,13 +130,13 @@ function showLoadingIndicator() {
     loadingIndicator.id = 'loading-indicator';
     loadingIndicator.className = 'flex items-start space-x-3';
     loadingIndicator.innerHTML = `
-        <div class="w-8 h-8 bg-blue-600 rounded-sm flex items-center justify-center flex-shrink-0">
-            <i class="fas fa-robot text-white text-xs"></i>
+        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-concierge-bell text-white text-xs"></i>
         </div>
-        <div class="bg-white p-3 border border-gray-200 rounded-sm shadow-sm">
+        <div class="bg-white p-3 border border-gray-200 rounded-lg shadow-sm">
             <div class="flex items-center space-x-2">
                 <div class="loading-spinner"></div>
-                <span class="text-sm text-gray-600">Processing your request...</span>
+                <span class="text-sm text-gray-600">Finding the perfect table for you...</span>
             </div>
         </div>
     `;
@@ -157,19 +173,19 @@ function generateAIResponse(message) {
     // Determine response type based on keywords
     let responseType = 'default';
     
-    if (lowerMessage.includes('hours') || lowerMessage.includes('open') || lowerMessage.includes('close')) {
+    if (lowerMessage.includes('reservation') || lowerMessage.includes('book') || lowerMessage.includes('table')) {
+        responseType = 'reservation';
+    } else if (lowerMessage.includes('menu') || lowerMessage.includes('dish') || lowerMessage.includes('food') || lowerMessage.includes('popular')) {
+        responseType = 'menu';
+    } else if (lowerMessage.includes('hours') || lowerMessage.includes('open') || lowerMessage.includes('close') || lowerMessage.includes('time')) {
         responseType = 'hours';
-    } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('$')) {
-        responseType = 'price';
-    } else if (lowerMessage.includes('add') || lowerMessage.includes('new service') || lowerMessage.includes('service')) {
-        responseType = 'service';
-    } else if (lowerMessage.includes('closed') || lowerMessage.includes('close') || lowerMessage.includes('unavailable')) {
-        responseType = 'closed';
-    } else if (lowerMessage.includes('phone') || lowerMessage.includes('number') || lowerMessage.includes('contact')) {
-        responseType = 'phone';
+    } else if (lowerMessage.includes('vegetarian') || lowerMessage.includes('vegan') || lowerMessage.includes('dietary') || lowerMessage.includes('gluten')) {
+        responseType = 'vegetarian';
+    } else if (lowerMessage.includes('location') || lowerMessage.includes('address') || lowerMessage.includes('where') || lowerMessage.includes('direction')) {
+        responseType = 'location';
     }
     
-    return fakeAPIResponses[responseType] || fakeAPIResponses.default;
+    return restaurantResponses[responseType] || restaurantResponses.default;
 }
 
 function addAIMessage(response) {
@@ -177,12 +193,12 @@ function addAIMessage(response) {
     const aiMessage = document.createElement('div');
     aiMessage.className = 'flex items-start space-x-3 api-response';
     aiMessage.innerHTML = `
-        <div class="w-8 h-8 bg-blue-600 rounded-sm flex items-center justify-center flex-shrink-0">
-            <i class="fas fa-robot text-white text-xs"></i>
+        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-concierge-bell text-white text-xs"></i>
         </div>
-        <div class="bg-white p-3 max-w-[80%] message border border-gray-200 shadow-sm">
+        <div class="bg-white p-3 max-w-[80%] message border border-gray-200 shadow-sm rounded-lg">
             <p class="text-sm text-gray-800 whitespace-pre-line">${response.text}</p>
-            ${response.action ? `<p class="text-xs text-blue-600 mt-2 font-medium">✓ ${response.action}</p>` : ''}
+            ${response.action ? `<p class="text-xs text-purple-600 mt-2 font-medium">✓ ${response.action}</p>` : ''}
         </div>
     `;
     messagesContainer.appendChild(aiMessage);
@@ -204,10 +220,16 @@ function testLoading() {
     }, 3000);
 }
 
+function setPresetMessage(message) {
+    const input = document.getElementById('chat-input');
+    input.value = message;
+    input.focus();
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded');
-    
+
     // Add enter key support for chat
     document.getElementById('chat-input').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
@@ -215,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
             sendMessage();
         }
     });
-    
+
     // Focus chat input on load
     document.getElementById('chat-input').focus();
 });

@@ -1,9 +1,10 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Alert } from 'react-native';
 import { ChatInput } from '@/components/ui/chat-input';
 import { MessageBubble } from '@/components/ui/message-bubble';
 import { Card, CardContent } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
+import { CheckCircle, AlertCircle, Info } from 'lucide-react-native';
 import { api } from '@/lib/api';
 
 type Message = {
@@ -15,6 +16,8 @@ type Message = {
     understood: string;
     applied: string;
     actions?: string[];
+    success?: boolean;
+    error?: string;
   };
 };
 
@@ -45,9 +48,19 @@ export default function ChatScreen() {
         text: 'Sorry, I couldn\'t process your request. Please try again.',
         isSent: false,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        chathyResponse: {
+          understood: 'Failed to process request',
+          applied: 'No action taken',
+          error: error.message,
+          success: false,
+        },
       };
       setMessages(prev => [...prev, errorReply]);
     }
+  };
+
+  const handleClearChat = () => {
+    setMessages([]);
   };
 
   const renderMessage = ({ item }: { item: Message }) => (
@@ -60,14 +73,36 @@ export default function ChatScreen() {
       {item.chathyResponse && item.isSent && (
         <Card className="mt-4 mx-6">
           <CardContent className="p-6">
+            <View className="flex-row items-center gap-2 mb-3">
+              {item.chathyResponse.success === false ? (
+                <AlertCircle size={20} color="#EF4444" />
+              ) : (
+                <CheckCircle size={20} color="#10B981" />
+              )}
+              <Text className="text-sm font-medium">
+                {item.chathyResponse.success === false ? 'Action Failed' : 'Action Completed'}
+              </Text>
+            </View>
+            
             <Text className="text-sm font-medium mb-3">What I understood:</Text>
             <Text variant="muted" className="text-sm mb-4">
               {item.chathyResponse.understood}
             </Text>
+            
             <Text className="text-sm font-medium mb-3">What I applied:</Text>
             <Text variant="muted" className="text-sm mb-4">
               {item.chathyResponse.applied}
             </Text>
+            
+            {item.chathyResponse.error && (
+              <>
+                <Text className="text-sm font-medium mb-3 text-red-600">Error:</Text>
+                <Text variant="muted" className="text-sm mb-4 text-red-600">
+                  {item.chathyResponse.error}
+                </Text>
+              </>
+            )}
+            
             {item.chathyResponse.actions && (
               <>
                 <Text className="text-sm font-medium mb-3">Actions triggered:</Text>
@@ -93,7 +128,11 @@ export default function ChatScreen() {
         contentContainerStyle={{ padding: 24 }}
         showsVerticalScrollIndicator={false}
       />
-      <ChatInput onSendMessage={handleSendMessage} />
+      <ChatInput 
+        onSendMessage={handleSendMessage} 
+        onClearChat={handleClearChat}
+        placeholder="Ask me to update your business hours, prices, location, staff, or availability..."
+      />
     </View>
   );
 }

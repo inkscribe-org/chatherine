@@ -6,7 +6,11 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const telegramRoutes = require('./routes/telegram');
+const businessRoutes = require('./routes/business');
+const authRoutes = require('./routes/auth');
 console.log('Telegram routes loaded:', typeof telegramRoutes);
+console.log('Business routes loaded:', typeof businessRoutes);
+console.log('Auth routes loaded:', typeof authRoutes);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,6 +34,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Telegram webhook route
 app.use('/webhook/telegram', telegramRoutes);
+
+// Auth API routes
+app.use('/api/auth', authRoutes);
+
+// Business API routes
+app.use('/api/business', businessRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
