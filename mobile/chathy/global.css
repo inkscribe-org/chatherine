@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* IBM Carbon Design System - Light Theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 214 100% 56%; /* IBM Blue: #0F62FE */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 22%; /* Gray 100: #393939 */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 96%; /* Gray 10: #F4F4F4 */
+    --muted-foreground: 0 0% 47%; /* Gray 60: #6F6F6F */
+    --accent: 174 100% 37%; /* IBM Teal: #08BDBA */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 79% 54%; /* IBM Red: #DA1E28 */
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 88%; /* Gray 20: #E0E0E0 */
+    --input: 0 0% 88%; /* Gray 20: #E0E0E0 */
+    --ring: 214 100% 56%; /* IBM Blue: #0F62FE */
+    --radius: 0rem; /* IBM Design System - sharp corners */
+
+    /* IBM Carbon Typography */
+    --heading-01: 0.75rem/1.33 "IBM Plex Sans";
+    --heading-02: 0.875rem/1.29 "IBM Plex Sans";
+    --heading-03: 1rem/1.375 "IBM Plex Sans";
+    --heading-04: 1.25rem/1.25 "IBM Plex Sans";
+    --heading-05: 1.5rem/1.33 "IBM Plex Sans";
+
+    /* IBM Carbon Specific Colors for Tailwind CSS */
+    --color-blue-10: #e5f6ff;
+    --color-blue-20: #bae6ff;
+    --color-blue-30: #82cfff;
+    --color-blue-40: #33b1ff;
+    --color-blue-50: #1192e8;
+    --color-blue-60: #0072c3;
+    --color-blue-70: #00539a;
+    --color-blue-80: #003a6d;
+    --color-blue-90: #002549;
+    --color-blue-100: #001d3c;
+
+    --color-gray-10: #f4f4f4;
+    --color-gray-20: #e0e0e0;
+    --color-gray-30: #c6c6c6;
+    --color-gray-40: #a8a8a8;
+    --color-gray-50: #8d8d8d;
+    --color-gray-60: #6f6f6f;
+    --color-gray-70: #525252;
+    --color-gray-80: #393939;
+    --color-gray-90: #262626;
+    --color-gray-100: #161616;
+
+    --color-red-10: #fff1f1;
+    --color-red-20: #ffd7d9;
+    --color-red-30: #ffb3b8;
+    --color-red-40: #ff8389;
+    --color-red-50: #fa4d56;
+    --color-red-60: #da1e28;
+    --color-red-70: #a2191f;
+    --color-red-80: #730e13;
+    --color-red-90: #400e0a;
+    --color-red-100: #2d0709;
+
+    --color-green-10: #edf5ec;
+    --color-green-20: #d4e8d4;
+    --color-green-30: #bad6ba;
+    --color-green-40: #8fc383;
+    --color-green-50: #5da052;
+    --color-green-60: #24a148;
+    --color-green-70: #198038;
+    --color-green-80: #0e6027;
+    --color-green-90: #044317;
+    --color-green-100: #022d0d;
+
+    --color-teal-10: #e6f7f7;
+    --color-teal-20: #cff1f1;
+    --color-teal-30: #a6e8e6;
+    --color-teal-40: #73dad8;
+    --color-teal-50: #3dbdb4;
+    --color-teal-60: #08bdba;
+    --color-teal-70: #009a96;
+    --color-teal-80: #00787c;
+    --color-teal-90: #005a5e;
+    --color-teal-100: #003d41;
+
+    --color-yellow-60: #f1c21b;
+  }
+
+  .dark {
+    /* IBM Carbon Design System - Dark Theme */
+    --background: 0 0% 9%; /* Gray 100: #161616 */
+    --foreground: 0 0% 100%;
+    --card: 0 0% 9%; /* Gray 100: #161616 */
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 9%; /* Gray 100: #161616 */
+    --popover-foreground: 0 0% 100%;
+    --primary: 214 100% 68%; /* IBM Blue 60: #4589FF */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 32%; /* Gray 70: #525252 */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%; /* Gray 90: #262626 */
+    --muted-foreground: 0 0% 65%; /* Gray 40: #a8a8a8 */
+    --accent: 174 100% 59%; /* IBM Teal 60: #3DDBD9 */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 79% 70%; /* IBM Red 60: #FA4D56 */
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 22%; /* Gray 80: #393939 */
+    --input: 0 0% 22%; /* Gray 80: #393939 */
+    --ring: 214 100% 68%; /* IBM Blue 60: #4589FF */
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui;
+  }
+}
