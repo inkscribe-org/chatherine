@@ -5,7 +5,7 @@ const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-const whatsappRoutes = require('./routes/whatsapp');
+const telegramRoutes = require('./routes/telegram');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,15 +25,15 @@ app.use('/webhook/', limiter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// WhatsApp webhook route
-app.post('/webhook/whatsapp', whatsappRoutes);
+// Telegram webhook route
+app.post('/webhook/telegram', telegramRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    service: 'Chathy WhatsApp Bot',
+    service: 'Chathy Telegram Bot',
     version: '1.0.0'
   });
 });
@@ -41,10 +41,10 @@ app.get('/health', (req, res) => {
 // Root endpoint - bot info
 app.get('/', (req, res) => {
   res.json({
-    bot: 'Chathy WhatsApp Bot',
+    bot: 'Chathy Telegram Bot',
     description: 'Your business, updated by text.',
     status: 'running',
-    webhook: '/webhook/whatsapp',
+    webhook: '/webhook/telegram',
     health: '/health',
     commands: [
       'Increase [service] from $[old] to $[new]',
@@ -70,12 +70,12 @@ app.use('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🤖 Chathy WhatsApp Bot running on port ${PORT}`);
-  console.log(`📱 WhatsApp webhook: http://localhost:${PORT}/webhook/whatsapp`);
+  console.log(`🤖 Chathy Telegram Bot running on port ${PORT}`);
+  console.log(`📱 Telegram webhook: http://localhost:${PORT}/webhook/telegram`);
   console.log(`🔗 Health check: http://localhost:${PORT}/health`);
   console.log(`📋 Bot info: http://localhost:${PORT}/`);
   console.log('');
-  console.log('🚀 Bot is ready to receive WhatsApp messages!');
+  console.log('🚀 Bot is ready to receive Telegram messages!');
 });
 
 module.exports = app;

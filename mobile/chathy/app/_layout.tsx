@@ -5,7 +5,8 @@ import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native';
+import { View } from 'react-native';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useColorScheme } from 'nativewind';
 import { Text } from '@/components/ui/text';
 import { useFonts } from 'expo-font';
@@ -35,6 +36,7 @@ export {
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
+  const insets = useSafeAreaInsets();
 
   const [fontsLoaded] = useFonts({
     'IBM Plex Sans Thin': IBMPlexSans_100Thin,
@@ -55,19 +57,21 @@ export default function RootLayout() {
 
   if (!fontsLoaded) {
     return (
-      <SafeAreaView className="flex-1 bg-background justify-center items-center">
+      <View style={{ flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom }} className="bg-background justify-center items-center">
         <Text>Loading fonts...</Text>
-      </SafeAreaView>
+      </View>
     );
   }
 
   return (
-    <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-      <SafeAreaView className="flex-1 bg-background">
-        <Stack screenOptions={{ headerShown: false }} />
-      </SafeAreaView>
-      <PortalHost />
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        <View style={{ flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom }} className="bg-background">
+          <Stack screenOptions={{ headerShown: false }} />
+        </View>
+        <PortalHost />
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }

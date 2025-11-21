@@ -1,10 +1,10 @@
-import { Link, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 import { View, ScrollView } from 'react-native';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
+import { Button } from '@/components/ui/button';
 import { IBMMasthead } from '@/components/ui/ibm-masthead';
-import { Clock, Calendar, TrendingUp, AlertTriangle, MessageCircle } from 'lucide-react-native';
+import { AlertTriangle } from 'lucide-react-native';
 
 const RECENT_UPDATES = [
   {
@@ -50,7 +50,7 @@ export default function DashboardScreen() {
       <Stack.Screen options={{ title: 'Dashboard' }} />
       <ScrollView className="flex-1 bg-background">
         <IBMMasthead />
-        <View className="p-8 space-y-10">
+        <View className="p-8 space-y-16">
           {/* Recent Updates Feed */}
           <Card>
             <CardHeader>
@@ -71,21 +71,43 @@ export default function DashboardScreen() {
                 ))}
               </View>
             </CardContent>
-          </Card>
+           </Card>
 
-          {/* Business Snapshot */}
-          <View className="space-y-8">
+           {/* Quick Actions */}
+           <Card>
+             <CardHeader>
+               <CardTitle>Quick Actions</CardTitle>
+             </CardHeader>
+             <CardContent className="p-6">
+               <View className="flex-row flex-wrap gap-2">
+                 <Button variant="outline" size="sm" onPress={() => alert('Update today’s hours')}>
+                   <Text>Update today’s hours</Text>
+                 </Button>
+                 <Button variant="outline" size="sm" onPress={() => alert('Pause booking')}>
+                   <Text>Pause booking</Text>
+                 </Button>
+                 <Button variant="outline" size="sm" onPress={() => alert('Add a new service')}>
+                   <Text>Add a new service</Text>
+                 </Button>
+                 <Button variant="outline" size="sm" onPress={() => alert('Manage inventory item')}>
+                   <Text>Manage inventory item</Text>
+                 </Button>
+                 <Button variant="outline" size="sm" onPress={() => alert('Send a broadcast SMS')}>
+                   <Text>Send a broadcast SMS</Text>
+                 </Button>
+               </View>
+             </CardContent>
+           </Card>
+
+           <View className="space-y-16 my-8 gap-8">
             <Text className="text-xl font-semibold">Business Snapshot</Text>
 
             {/* Hours Today */}
             <Card>
               <CardContent className="p-6">
-                <View className="flex-row items-center gap-3">
-                  <Clock size={24} color="#0F62FE" />
-                  <View>
-                    <Text className="font-medium text-base">Hours Today</Text>
-                    <Text variant="muted" className="text-sm">{BUSINESS_SNAPSHOT.hoursToday}</Text>
-                  </View>
+                <View>
+                  <Text className="font-medium text-base">Hours Today</Text>
+                  <Text variant="muted" className="text-sm">{BUSINESS_SNAPSHOT.hoursToday}</Text>
                 </View>
               </CardContent>
             </Card>
@@ -93,10 +115,7 @@ export default function DashboardScreen() {
             {/* Next Appointments */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex-row items-center gap-2">
-                  <Calendar size={20} color="#0F62FE" />
-                  Next 5 Appointments
-                </CardTitle>
+                <CardTitle>Next 5 Appointments</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <View className="space-y-3">
@@ -112,10 +131,7 @@ export default function DashboardScreen() {
             {/* Top Services */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex-row items-center gap-2">
-                  <TrendingUp size={20} color="#0F62FE" />
-                  Top Services This Week
-                </CardTitle>
+                <CardTitle>Top Services This Week</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <View className="space-y-3">
@@ -150,13 +166,7 @@ export default function DashboardScreen() {
             )}
           </View>
 
-          {/* Text Chathy Button */}
-          <Link href="/chat" asChild>
-            <Button size="lg" className="w-full">
-              <MessageCircle size={20} className="mr-2" />
-              <Text>Text Chathy</Text>
-            </Button>
-          </Link>
+
         </View>
       </ScrollView>
     </>
