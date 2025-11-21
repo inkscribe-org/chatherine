@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import { cn } from '@/lib/utils';
 import { Send } from 'lucide-react-native';
 import { View } from 'react-native';
@@ -11,7 +12,7 @@ type ChatInputProps = {
 };
 
 function ChatInput({ onSendMessage, placeholder = 'Type a message...', className }: ChatInputProps) {
-  const [message, setMessage] = React.useState('');
+  const [message, setMessage] = useState('');
 
   const handleSend = () => {
     if (message.trim()) {

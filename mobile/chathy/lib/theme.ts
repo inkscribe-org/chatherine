@@ -2,58 +2,58 @@ import { DarkTheme, DefaultTheme, type Theme } from '@react-navigation/native';
  
 export const THEME = {
   light: {
-    background: 'hsl(0 0% 100%)', // White
-    foreground: 'hsl(0 0% 0%)', // Black
-    card: 'hsl(0 0% 100%)',
-    cardForeground: 'hsl(0 0% 0%)',
-    popover: 'hsl(0 0% 100%)',
-    popoverForeground: 'hsl(0 0% 0%)',
-    primary: 'hsl(214 100% 56%)', // IBM Blue #0F62FE
-    primaryForeground: 'hsl(0 0% 100%)',
-    secondary: 'hsl(0 0% 22%)', // Gray 100 #393939
-    secondaryForeground: 'hsl(0 0% 100%)',
-    muted: 'hsl(0 0% 96%)', // Gray 10 #F4F4F4
-    mutedForeground: 'hsl(0 0% 47%)', // Gray 60 #6F6F6F
-    accent: 'hsl(174 100% 37%)', // IBM Teal #08BDBA
-    accentForeground: 'hsl(0 0% 100%)',
-    destructive: 'hsl(0 79% 54%)', // IBM Red #DA1E28
-    destructiveForeground: 'hsl(0 0% 100%)',
-    border: 'hsl(0 0% 88%)', // Gray 20 #E0E0E0
-    input: 'hsl(0 0% 88%)', // Gray 20 #E0E0E0
-    ring: 'hsl(214 100% 56%)', // IBM Blue #0F62FE
+    background: '#FFFFFF', // White
+    foreground: '#000000', // Black
+    card: '#FFFFFF',
+    cardForeground: '#000000',
+    popover: '#FFFFFF',
+    popoverForeground: '#000000',
+    primary: '#0F62FE', // IBM Blue
+    primaryForeground: '#FFFFFF',
+    secondary: '#393939', // Gray 100
+    secondaryForeground: '#FFFFFF',
+    muted: '#F4F4F4', // Gray 10
+    mutedForeground: '#6F6F6F', // Gray 60
+    accent: '#08BDBA', // IBM Teal
+    accentForeground: '#FFFFFF',
+    destructive: '#DA1E28', // IBM Red
+    destructiveForeground: '#FFFFFF',
+    border: '#E0E0E0', // Gray 20
+    input: '#E0E0E0', // Gray 20
+    ring: '#0F62FE', // IBM Blue
     radius: '0rem', // Sharp corners
-    chart1: 'hsl(12 76% 61%)',
-    chart2: 'hsl(173 58% 39%)',
-    chart3: 'hsl(197 37% 24%)',
-    chart4: 'hsl(43 74% 66%)',
-    chart5: 'hsl(27 87% 67%)',
+    chart1: '#FF6B6B',
+    chart2: '#4ECDC4',
+    chart3: '#45B7D1',
+    chart4: '#FFA07A',
+    chart5: '#98D8C8',
   },
   dark: {
-    background: 'hsl(0 0% 9%)', // Gray 100 #161616
-    foreground: 'hsl(0 0% 100%)',
-    card: 'hsl(0 0% 9%)',
-    cardForeground: 'hsl(0 0% 100%)',
-    popover: 'hsl(0 0% 9%)',
-    popoverForeground: 'hsl(0 0% 100%)',
-    primary: 'hsl(214 100% 68%)', // IBM Blue 60 #4589FF
-    primaryForeground: 'hsl(0 0% 100%)',
-    secondary: 'hsl(0 0% 32%)', // Gray 70 #525252
-    secondaryForeground: 'hsl(0 0% 100%)',
-    muted: 'hsl(0 0% 15%)', // Gray 90 #262626
-    mutedForeground: 'hsl(0 0% 65%)', // Gray 40 #a8a8a8
-    accent: 'hsl(174 100% 59%)', // IBM Teal 60 #3DDBD9
-    accentForeground: 'hsl(0 0% 100%)',
-    destructive: 'hsl(0 79% 70%)', // IBM Red 60 #FA4D56
-    destructiveForeground: 'hsl(0 0% 100%)',
-    border: 'hsl(0 0% 22%)', // Gray 80 #393939
-    input: 'hsl(0 0% 22%)', // Gray 80 #393939
-    ring: 'hsl(214 100% 68%)', // IBM Blue 60 #4589FF
+    background: '#161616', // Gray 100
+    foreground: '#FFFFFF',
+    card: '#161616',
+    cardForeground: '#FFFFFF',
+    popover: '#161616',
+    popoverForeground: '#FFFFFF',
+    primary: '#4589FF', // IBM Blue 60
+    primaryForeground: '#FFFFFF',
+    secondary: '#525252', // Gray 70
+    secondaryForeground: '#FFFFFF',
+    muted: '#262626', // Gray 90
+    mutedForeground: '#A8A8A8', // Gray 40
+    accent: '#3DDBD9', // IBM Teal 60
+    accentForeground: '#FFFFFF',
+    destructive: '#FA4D56', // IBM Red 60
+    destructiveForeground: '#FFFFFF',
+    border: '#393939', // Gray 80
+    input: '#393939', // Gray 80
+    ring: '#4589FF', // IBM Blue 60
     radius: '0rem', // Sharp corners
-    chart1: 'hsl(220 70% 50%)',
-    chart2: 'hsl(160 60% 45%)',
-    chart3: 'hsl(30 80% 55%)',
-    chart4: 'hsl(280 65% 60%)',
-    chart5: 'hsl(340 75% 55%)',
+    chart1: '#FF6B6B',
+    chart2: '#4ECDC4',
+    chart3: '#45B7D1',
+    chart4: '#FFA07A',
+    chart5: '#98D8C8',
   },
 };
  

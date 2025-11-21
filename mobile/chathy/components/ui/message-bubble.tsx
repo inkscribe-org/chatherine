@@ -4,12 +4,12 @@ import { View } from 'react-native';
 import { Text } from './text';
 
 const messageBubbleVariants = cva(
-  'max-w-[80%] p-3 mb-2',
+  'max-w-[80%] p-4 mb-4',
   {
     variants: {
       variant: {
-        sent: 'bg-primary self-end rounded-l-md rounded-tr-md',
-        received: 'bg-muted self-start rounded-r-md rounded-tl-md',
+        sent: 'bg-primary self-end',
+        received: 'bg-muted self-start',
       },
     },
     defaultVariants: {

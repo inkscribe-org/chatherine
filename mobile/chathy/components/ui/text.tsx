@@ -16,7 +16,7 @@ const textVariants = cva(
       variant: {
         default: '',
         h1: cn(
-          'text-center text-4xl font-extrabold tracking-tight',
+          'text-center text-4xl font-bold tracking-tight',
           Platform.select({ web: 'scroll-m-20 text-balance' })
         ),
         h2: cn(
@@ -28,7 +28,7 @@ const textVariants = cva(
         p: 'mt-3 leading-7 sm:mt-6',
         blockquote: 'mt-4 border-l-2 pl-3 italic sm:mt-6 sm:pl-6',
         code: cn(
-          'bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold'
+          'bg-muted relative rounded px-[0.3rem] py-[0.2rem] text-sm font-semibold'
         ),
         lead: 'text-muted-foreground text-xl',
         large: 'text-lg font-semibold',
@@ -76,9 +76,11 @@ function Text({
   }) {
   const textClass = React.useContext(TextClassContext);
   const Component = asChild ? Slot.Text : RNText;
+  const fontFamily = variant === 'code' ? 'IBM Plex Mono' : ['h1', 'h2', 'h3', 'h4'].includes(variant || 'default') ? 'IBM Plex Sans SemiBold' : 'IBM Plex Sans';
   return (
     <Component
       className={cn(textVariants({ variant }), textClass, className)}
+      style={{ fontFamily }}
       role={variant ? ROLE[variant] : undefined}
       aria-level={variant ? ARIA_LEVEL[variant] : undefined}
       {...props}

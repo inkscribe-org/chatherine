@@ -5,7 +5,28 @@ import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView } from 'react-native';
 import { useColorScheme } from 'nativewind';
+import { Text } from '@/components/ui/text';
+import { useFonts } from 'expo-font';
+import {
+  IBMPlexSans_100Thin,
+  IBMPlexSans_200ExtraLight,
+  IBMPlexSans_300Light,
+  IBMPlexSans_400Regular,
+  IBMPlexSans_500Medium,
+  IBMPlexSans_600SemiBold,
+  IBMPlexSans_700Bold,
+} from '@expo-google-fonts/ibm-plex-sans';
+import {
+  IBMPlexMono_100Thin,
+  IBMPlexMono_200ExtraLight,
+  IBMPlexMono_300Light,
+  IBMPlexMono_400Regular,
+  IBMPlexMono_500Medium,
+  IBMPlexMono_600SemiBold,
+  IBMPlexMono_700Bold,
+} from '@expo-google-fonts/ibm-plex-mono';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -15,10 +36,37 @@ export {
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
 
+  const [fontsLoaded] = useFonts({
+    'IBM Plex Sans Thin': IBMPlexSans_100Thin,
+    'IBM Plex Sans ExtraLight': IBMPlexSans_200ExtraLight,
+    'IBM Plex Sans Light': IBMPlexSans_300Light,
+    'IBM Plex Sans': IBMPlexSans_400Regular,
+    'IBM Plex Sans Medium': IBMPlexSans_500Medium,
+    'IBM Plex Sans SemiBold': IBMPlexSans_600SemiBold,
+    'IBM Plex Sans Bold': IBMPlexSans_700Bold,
+    'IBM Plex Mono Thin': IBMPlexMono_100Thin,
+    'IBM Plex Mono ExtraLight': IBMPlexMono_200ExtraLight,
+    'IBM Plex Mono Light': IBMPlexMono_300Light,
+    'IBM Plex Mono': IBMPlexMono_400Regular,
+    'IBM Plex Mono Medium': IBMPlexMono_500Medium,
+    'IBM Plex Mono SemiBold': IBMPlexMono_600SemiBold,
+    'IBM Plex Mono Bold': IBMPlexMono_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <SafeAreaView className="flex-1 bg-background justify-center items-center">
+        <Text>Loading fonts...</Text>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-      <Stack />
+      <SafeAreaView className="flex-1 bg-background">
+        <Stack screenOptions={{ headerShown: false }} />
+      </SafeAreaView>
       <PortalHost />
     </ThemeProvider>
   );

@@ -181,7 +181,7 @@ function addAIMessage(response) {
             <i class="fas fa-robot text-primary-content text-xs"></i>
         </div>
         <div class="bg-base-200 p-3 max-w-[80%] message border-2 border-base-300">
-            <p class="text-sm text-card-foreground whitespace-pre-line">${response.text}</p>
+            <p class="text-sm text-base-content whitespace-pre-line">${response.text}</p>
             ${response.action ? `<p class="text-xs text-primary mt-2 font-medium">✓ ${response.action}</p>` : ''}
         </div>
     `;
@@ -205,7 +205,7 @@ function addUpdateToFeed(action) {
             </div>
         </div>
         <div class="flex-1">
-            <p class="text-sm text-card-foreground">${action}</p>
+            <p class="text-sm text-base-content">${action}</p>
             <p class="text-xs text-muted-foreground mt-1">Just now</p>
         </div>
     `;

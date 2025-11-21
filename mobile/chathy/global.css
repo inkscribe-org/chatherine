@@ -5,33 +5,33 @@
 @layer base {
   :root {
     /* IBM Carbon Design System - Light Theme */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 214 100% 56%; /* IBM Blue: #0F62FE */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 22%; /* Gray 100: #393939 */
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 96%; /* Gray 10: #F4F4F4 */
-    --muted-foreground: 0 0% 47%; /* Gray 60: #6F6F6F */
-    --accent: 174 100% 37%; /* IBM Teal: #08BDBA */
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 79% 54%; /* IBM Red: #DA1E28 */
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 88%; /* Gray 20: #E0E0E0 */
-    --input: 0 0% 88%; /* Gray 20: #E0E0E0 */
-    --ring: 214 100% 56%; /* IBM Blue: #0F62FE */
+    --background: #FFFFFF;
+    --foreground: #000000;
+    --card: #FFFFFF;
+    --card-foreground: #000000;
+    --popover: #FFFFFF;
+    --popover-foreground: #000000;
+    --primary: #0F62FE; /* IBM Blue */
+    --primary-foreground: #FFFFFF;
+    --secondary: #393939; /* Gray 100 */
+    --secondary-foreground: #FFFFFF;
+    --muted: #F4F4F4; /* Gray 10 */
+    --muted-foreground: #6F6F6F; /* Gray 60 */
+    --accent: #08BDBA; /* IBM Teal */
+    --accent-foreground: #FFFFFF;
+    --destructive: #DA1E28; /* IBM Red */
+    --destructive-foreground: #FFFFFF;
+    --border: #E0E0E0; /* Gray 20 */
+    --input: #E0E0E0; /* Gray 20 */
+    --ring: #0F62FE; /* IBM Blue */
     --radius: 0rem; /* IBM Design System - sharp corners */
 
     /* IBM Carbon Typography */
-    --heading-01: 0.75rem/1.33 "IBM Plex Sans";
-    --heading-02: 0.875rem/1.29 "IBM Plex Sans";
-    --heading-03: 1rem/1.375 "IBM Plex Sans";
-    --heading-04: 1.25rem/1.25 "IBM Plex Sans";
-    --heading-05: 1.5rem/1.33 "IBM Plex Sans";
+    --heading-01: 0.75rem/1.33 "IBM Plex Sans SemiBold";
+    --heading-02: 0.875rem/1.29 "IBM Plex Sans SemiBold";
+    --heading-03: 1rem/1.375 "IBM Plex Sans SemiBold";
+    --heading-04: 1.25rem/1.25 "IBM Plex Sans SemiBold";
+    --heading-05: 1.5rem/1.33 "IBM Plex Sans SemiBold";
 
     /* IBM Carbon Specific Colors for Tailwind CSS */
     --color-blue-10: #e5f6ff;
@@ -94,35 +94,82 @@
 
   .dark {
     /* IBM Carbon Design System - Dark Theme */
-    --background: 0 0% 9%; /* Gray 100: #161616 */
-    --foreground: 0 0% 100%;
-    --card: 0 0% 9%; /* Gray 100: #161616 */
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 9%; /* Gray 100: #161616 */
-    --popover-foreground: 0 0% 100%;
-    --primary: 214 100% 68%; /* IBM Blue 60: #4589FF */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 32%; /* Gray 70: #525252 */
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 15%; /* Gray 90: #262626 */
-    --muted-foreground: 0 0% 65%; /* Gray 40: #a8a8a8 */
-    --accent: 174 100% 59%; /* IBM Teal 60: #3DDBD9 */
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 79% 70%; /* IBM Red 60: #FA4D56 */
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 22%; /* Gray 80: #393939 */
-    --input: 0 0% 22%; /* Gray 80: #393939 */
-    --ring: 214 100% 68%; /* IBM Blue 60: #4589FF */
+    --background: #161616; /* Gray 100 */
+    --foreground: #FFFFFF;
+    --card: #161616; /* Gray 100 */
+    --card-foreground: #FFFFFF;
+    --popover: #161616; /* Gray 100 */
+    --popover-foreground: #FFFFFF;
+    --primary: #4589FF; /* IBM Blue 60 */
+    --primary-foreground: #FFFFFF;
+    --secondary: #525252; /* Gray 70 */
+    --secondary-foreground: #FFFFFF;
+    --muted: #262626; /* Gray 90 */
+    --muted-foreground: #A8A8A8; /* Gray 40 */
+    --accent: #3DDBD9; /* IBM Teal 60 */
+    --accent-foreground: #FFFFFF;
+    --destructive: #FA4D56; /* IBM Red 60 */
+    --destructive-foreground: #FFFFFF;
+    --border: #393939; /* Gray 80 */
+    --input: #393939; /* Gray 80 */
+    --ring: #4589FF; /* IBM Blue 60 */
   }
 }
 
 @layer base {
   * {
-    border-color: hsl(var(--border));
+    border-color: var(--border);
   }
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    background-color: var(--background);
+    color: var(--foreground);
     font-family: "IBM Plex Sans", ui-sans-serif, system-ui;
+  }
+}
+
+/* Carbon-specific styles */
+@layer components {
+  .btn {
+    border-radius: 0;
+  }
+
+  .card {
+    border-radius: 0;
+  }
+
+  .input {
+    border-radius: 0;
+  }
+
+  .select {
+    border-radius: 0;
+  }
+
+  .textarea {
+    border-radius: 0;
+  }
+
+  .badge {
+    border-radius: 0;
+  }
+
+  .dropdown {
+    border-radius: 0;
+  }
+
+  .menu {
+    border-radius: 0;
+  }
+
+  .tabs {
+    border-radius: 0;
+  }
+
+  .alert {
+    border-radius: 0;
+  }
+
+  .modal-box {
+    border-radius: 0;
   }
 }
