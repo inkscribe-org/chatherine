@@ -3,105 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chathy - Your Business, Updated by Text</title>
+    <title>Chathy - AI Business Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         @import "tailwindcss";
-        @plugin "daisyui";
-        @plugin "daisyui/theme" {
-          name: "carbon";
-          default: true;
-          --color-primary: #0F62FE;
-          --color-primary-focus: #0043CE;
-          --color-primary-content: #FFFFFF;
-          --color-secondary: #393939;
-          --color-secondary-focus: #262626;
-          --color-secondary-content: #FFFFFF;
-          --color-accent: #08BDBA;
-          --color-accent-focus: #009C98;
-          --color-accent-content: #FFFFFF;
-          --color-base-100: #FFFFFF;
-          --color-base-200: #F4F4F4;
-          --color-base-300: #E0E0E0;
-          --color-base-content: #161616;
-          --color-info: #0043CE;
-          --color-success: #24A148;
-          --color-warning: #F1C21B;
-          --color-error: #DA1E28;
-          --rounded-box: 0px;
-          --rounded-btn: 0px;
-          --rounded-badge: 0px;
-          --btn-text-case: none;
-          --animation-btn: 0;
-          --tab-radius: 0px;
-        }
         
-        @layer base {
-          :root {
-            --background: 0 0% 100%;
-            --foreground: 0 0% 0%;
-            --card: 0 0% 100%;
-            --card-foreground: 0 0% 0%;
-            --popover: 0 0% 100%;
-            --popover-foreground: 0 0% 0%;
-            --primary: 214 100% 56%;
-            --primary-foreground: 0 0% 100%;
-            --secondary: 0 0% 22%;
-            --secondary-foreground: 0 0% 100%;
-            --muted: 0 0% 96%;
-            --muted-foreground: 0 0% 47%;
-            --accent: 174 100% 37%;
-            --accent-foreground: 0 0% 100%;
-            --destructive: 0 79% 54%;
-            --destructive-foreground: 0 0% 100%;
-            --border: 0 0% 88%;
-            --input: 0 0% 88%;
-            --ring: 214 100% 56%;
-            --radius: 0rem;
-            
-            /* IBM Carbon specific colors */
-            --color-primary: #0F62FE;
-            --color-primary-focus: #0043CE;
-            --color-primary-content: #FFFFFF;
-            --color-secondary: #393939;
-            --color-secondary-focus: #262626;
-            --color-secondary-content: #FFFFFF;
-            --color-accent: #08BDBA;
-            --color-accent-focus: #009C98;
-            --color-accent-content: #FFFFFF;
-            --color-base-100: #FFFFFF;
-            --color-base-200: #F4F4F4;
-            --color-base-300: #E0E0E0;
-            --color-base-content: #161616;
-            --color-info: #0043CE;
-            --color-success: #24A148;
-            --color-warning: #F1C21B;
-            --color-error: #DA1E28;
-          }
-          
-          .dark {
-            --background: 0 0% 9%;
-            --foreground: 0 0% 100%;
-            --card: 0 0% 9%;
-            --card-foreground: 0 0% 100%;
-            --popover: 0 0% 9%;
-            --popover-foreground: 0 0% 100%;
-            --primary: 214 100% 68%;
-            --primary-foreground: 0 0% 100%;
-            --secondary: 0 0% 32%;
-            --secondary-foreground: 0 0% 100%;
-            --muted: 0 0% 15%;
-            --muted-foreground: 0 0% 65%;
-            --accent: 174 100% 59%;
-            --accent-foreground: 0 0% 100%;
-            --destructive: 0 79% 70%;
-            --destructive-foreground: 0 0% 100%;
-            --border: 0 0% 22%;
-            --input: 0 0% 22%;
-            --ring: 214 100% 68%;
-          }
+        /* IBM Plex Sans font */
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: "IBM Plex Sans", ui-sans-serif, system-ui;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
         
         .screen { display: none; }
@@ -132,225 +48,57 @@
             to { opacity: 1; }
         }
         
-        /* IBM Carbon sharp corners */
-        .btn, .card, .input, .select, .textarea, .badge, .dropdown, .menu, .tabs, .alert, .modal-box {
+        /* IBM Design System - Chat Window Specific */
+        .chat-window {
+            border-radius: 0;
+            font-family: "IBM Plex Sans", ui-sans-serif, system-ui;
+        }
+        
+        /* IBM Blue colors */
+        .ibm-blue { background-color: #0F62FE; }
+        .ibm-blue-text { color: #0F62FE; }
+        .ibm-blue-hover:hover { background-color: #0043CE; }
+        
+        /* IBM Gray colors */
+        .ibm-gray-50 { background-color: #F4F4F4; }
+        .ibm-gray-100 { background-color: #FFFFFF; }
+        .ibm-gray-200 { background-color: #E0E0E0; }
+        .ibm-gray-300 { background-color: #C6C6C6; }
+        .ibm-gray-600 { color: #6F6F6F; }
+        .ibm-gray-800 { color: #161616; }
+        
+        /* IBM Sharp corners */
+        .ibm-sharp {
             border-radius: 0;
         }
-        
-        body {
-            font-family: "IBM Plex Sans", ui-sans-serif, system-ui;
-            background-color: hsl(var(--background));
-            color: hsl(var(--foreground));
-        }
-        
-        /* Ensure IBM Plex Sans is used everywhere */
-        * {
-            font-family: "IBM Plex Sans", ui-sans-serif, system-ui;
-        }
-        
-        /* IBM Carbon theme classes */
-        .bg-primary { background-color: hsl(var(--primary)); }
-        .text-primary-content { color: hsl(var(--primary-foreground)); }
-        .bg-base-100 { background-color: hsl(var(--base-100)); }
-        .bg-base-200 { background-color: hsl(var(--base-200)); }
-        .bg-base-300 { background-color: hsl(var(--base-300)); }
-        .text-base-content { color: hsl(var(--base-content)); }
-        .text-muted-foreground { color: hsl(var(--muted-foreground)); }
-        .text-card-foreground { color: hsl(var(--card-foreground)); }
-        .bg-card { background-color: hsl(var(--card)); }
-        .border-base-300 { border-color: hsl(var(--border)); }
-        .border-primary { border-color: hsl(var(--primary)); }
-        .bg-info { background-color: hsl(var(--info)); }
-        .text-info-content { color: hsl(var(--info-foreground)); }
-        .bg-success { background-color: hsl(var(--success)); }
-        .text-success-content { color: hsl(var(--success-foreground)); }
-        .bg-error { background-color: hsl(var(--destructive)); }
-        .text-error-content { color: hsl(var(--destructive-foreground)); }
-        .bg-warning { background-color: hsl(var(--warning)); }
-        .text-warning { color: hsl(var(--warning-foreground)); }
     </style>
 </head>
-<body class="bg-base-100 font-sans">
-    <!-- Main Dashboard -->
-    <div id="dashboard-screen" class="screen active min-h-screen bg-gray-50">
-        <!-- IBM Carbon Navigation -->
-        <nav class="bg-base-100 border-b border-base-300 h-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0 flex items-center">
-                            <div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center text-primary-content font-bold text-sm">
-                                C
-                            </div>
-                            <span class="text-xl font-semibold text-base-content ml-3">Chathy</span>
-                        </div>
-                        <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                            <button onclick="showScreen('dashboard-screen')" class="border-primary text-base-content inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                Dashboard
-                            </button>
-                            <button onclick="showScreen('business-data-screen')" class="border-transparent text-base-content/60 hover:border-base-300 hover:text-base-content inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                Business Data
-                            </button>
-                            <button onclick="showScreen('ai-settings-screen')" class="border-transparent text-base-content/60 hover:border-base-300 hover:text-base-content inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                AI Settings
-                            </button>
-                            <button onclick="showScreen('logs-screen')" class="border-transparent text-base-content/60 hover:border-base-300 hover:text-base-content inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                Logs & Insights
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <button onclick="toggleChat()" class="bg-primary text-primary-content px-4 py-2 text-sm font-medium hover:bg-primary/90 transition">
-                            <i class="fas fa-comment-dots mr-2"></i>Hide Chat
-                        </button>
-                        <div class="relative">
-                            <button class="flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-                                <div class="w-8 h-8 bg-base-200 rounded-sm flex items-center justify-center">
-                                    <i class="fas fa-user text-base-content text-sm"></i>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Dashboard Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Recent Updates Feed -->
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-card shadow-sm p-6 border-2 border-base-200">
-                        <h3 class="text-lg font-semibold text-card-foreground mb-4">Recent Updates</h3>
-                        <div class="space-y-4" id="updates-feed">
-                            <div class="flex items-start space-x-3 p-3 bg-info/10 border-l-4 border-info">
-                                <div class="flex-shrink-0">
-                                    <div class="w-8 h-8 bg-info rounded-sm flex items-center justify-center">
-                                        <i class="fas fa-clock text-info-content text-xs"></i>
-                                    </div>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-card-foreground">Updated Friday hours: Closed for private event</p>
-                                    <p class="text-xs text-muted-foreground mt-1">2 hours ago</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3 p-3 bg-success/10 border-l-4 border-success">
-                                <div class="flex-shrink-0">
-                                    <div class="w-8 h-8 bg-success rounded-sm flex items-center justify-center">
-                                        <i class="fas fa-dollar-sign text-success-content text-xs"></i>
-                                    </div>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-card-foreground">Updated service 'Full Facial' to $120</p>
-                                    <p class="text-xs text-muted-foreground mt-1">5 hours ago</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3 p-3 bg-primary/10 border-l-4 border-primary">
-                                <div class="flex-shrink-0">
-                                    <div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
-                                        <i class="fas fa-calendar text-primary-content text-xs"></i>
-                                    </div>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm text-card-foreground">Added new appointment: Sarah - Massage Therapy</p>
-                                    <p class="text-xs text-muted-foreground mt-1">Yesterday</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Business Snapshot -->
-                <div class="space-y-6">
-                    <div class="bg-card shadow-sm p-6 border-2 border-base-200">
-                        <h3 class="text-lg font-semibold text-card-foreground mb-4">Business Snapshot</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm text-muted-foreground">Hours Today</span>
-                                <span class="text-sm font-medium text-card-foreground">9:00 AM - 6:00 PM</span>
-                            </div>
-                            <div class="border-t pt-4">
-                                <p class="text-sm font-medium text-card-foreground mb-2">Next 5 Appointments</p>
-                                <div class="space-y-2">
-                                    <div class="text-xs">
-                                        <span class="font-medium">10:00 AM</span> - Sarah (Massage)
-                                    </div>
-                                    <div class="text-xs">
-                                        <span class="font-medium">11:30 AM</span> - Mike (Facial)
-                                    </div>
-                                    <div class="text-xs">
-                                        <span class="font-medium">2:00 PM</span> - Emma (Hair)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border-t pt-4">
-                                <p class="text-sm font-medium text-card-foreground mb-2">Top Services</p>
-                                <div class="space-y-1">
-                                    <div class="flex justify-between text-xs">
-                                        <span>Massage Therapy</span>
-                                        <span class="text-muted-foreground">$120</span>
-                                    </div>
-                                    <div class="flex justify-between text-xs">
-                                        <span>Full Facial</span>
-                                        <span class="text-muted-foreground">$120</span>
-                                    </div>
-                                    <div class="flex justify-between text-xs">
-                                        <span>Hair Styling</span>
-                                        <span class="text-muted-foreground">$80</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quick Actions -->
-                    <div class="bg-card shadow-sm p-6 border-2 border-base-200">
-                        <h3 class="text-lg font-semibold text-card-foreground mb-4">Quick Actions</h3>
-                        <div class="space-y-2">
-                            <button onclick="showScreen('business-data-screen')" class="w-full text-left px-4 py-3 bg-base-200 hover:bg-base-300 transition">
-                                <i class="fas fa-edit text-primary mr-3"></i>
-                                <span class="text-sm text-card-foreground">Edit Business Info</span>
-                            </button>
-                            <button onclick="showScreen('ai-settings-screen')" class="w-full text-left px-4 py-3 bg-base-200 hover:bg-base-300 transition">
-                                <i class="fas fa-cog text-primary mr-3"></i>
-                                <span class="text-sm text-card-foreground">AI Settings</span>
-                            </button>
-                            <button onclick="toggleChat()" class="w-full text-left px-4 py-3 bg-primary text-primary-content hover:bg-primary/90 transition">
-                                <i class="fas fa-comment-dots mr-3"></i>
-                                <span class="text-sm">Show Chat</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<body class="min-h-screen flex items-center justify-center p-4">
     <!-- Chat Interface -->
-    <div id="chat-interface" class="fixed bottom-4 right-4 w-96 h-[600px] bg-base-100 shadow-2xl flex flex-col z-50 border-2 border-base-300">
-        <div class="bg-primary text-primary-content p-4 flex items-center justify-between">
+    <div id="chat-interface" class="w-full max-w-md h-[600px] bg-white shadow-2xl flex flex-col z-50 border border-gray-200">
+        <div class="bg-blue-600 text-white p-4 flex items-center justify-between">
             <div class="flex items-center">
-                <div class="w-8 h-8 bg-primary/20 rounded-sm flex items-center justify-center mr-3">
-                    <i class="fas fa-robot text-primary-content text-sm"></i>
+                <div class="w-8 h-8 bg-white/20 rounded-sm flex items-center justify-center mr-3">
+                    <i class="fas fa-robot text-white text-sm"></i>
                 </div>
                 <div>
                     <h4 class="font-semibold">Chathy</h4>
-                    <p class="text-xs text-primary-content/80">Your AI Business Assistant</p>
+                    <p class="text-xs text-blue-100">Your AI Business Assistant</p>
                 </div>
             </div>
-            <button onclick="toggleChat()" class="text-primary-content/80 hover:text-primary-content">
+            <button onclick="toggleChat()" class="text-white/80 hover:text-white">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         
-        <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-base-100" id="chat-messages">
+        <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50" id="chat-messages">
             <div class="flex items-start space-x-3">
-                <div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-robot text-primary-content text-xs"></i>
+                <div class="w-8 h-8 bg-blue-600 rounded-sm flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-robot text-white text-xs"></i>
                 </div>
-                <div class="bg-base-200 p-3 max-w-[80%] border-2 border-base-300">
-                    <p class="text-sm text-base-content">Hi! I'm Chathy, your AI business assistant. You can update your business information by simply texting me. Try things like:</p>
-                    <ul class="text-xs text-muted-foreground mt-2 space-y-1">
+                <div class="bg-white p-3 max-w-[80%] border border-gray-200 shadow-sm">
+                    <p class="text-sm text-gray-800">Hi! I'm Chathy, your AI business assistant. You can update your business information by simply texting me. Try things like:</p>
+                    <ul class="text-xs text-gray-600 mt-2 space-y-1">
                         <li>• "Change my hours to 9-5"</li>
                         <li>• "Add a new service: Deep Tissue Massage for $150"</li>
                         <li>• "I'm closed tomorrow for a holiday"</li>
@@ -360,586 +108,18 @@
             </div>
         </div>
         
-        <div class="border-t border-base-300 p-4 bg-base-100">
+        <div class="border-t border-gray-200 p-4 bg-white">
             <div class="flex space-x-2">
                 <input 
                     type="text" 
                     id="chat-input" 
                     placeholder="Type your message..." 
-                    class="flex-1 px-4 py-2 border border-base-300 bg-base-100 text-base-content focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                    class="flex-1 px-4 py-2 border border-gray-300 bg-white text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     onkeypress="if(event.key === 'Enter') sendMessage()"
                 >
-                <button onclick="sendMessage()" class="bg-primary text-primary-content px-4 py-2 hover:bg-primary/90 transition">
+                <button onclick="sendMessage()" class="bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 transition">
                     <i class="fas fa-paper-plane"></i>
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Business Data Screen -->
-    <div id="business-data-screen" class="screen min-h-screen bg-base-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold text-card-foreground">Business Data</h2>
-                <p class="text-muted-foreground">View and manage your business information</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                <!-- Sidebar -->
-                <div class="lg:col-span-1">
-                    <div class="bg-card shadow-sm p-4 border-2 border-base-200">
-                        <nav class="space-y-1">
-                            <button onclick="showBusinessDataTab('hours')" class="w-full text-left px-4 py-3 bg-primary text-primary-content font-medium">
-                                <i class="fas fa-clock mr-3"></i>Hours & Schedule
-                            </button>
-                            <button onclick="showBusinessDataTab('services')" class="w-full text-left px-4 py-3 hover:bg-base-200 text-card-foreground">
-                                <i class="fas fa-list mr-3"></i>Services / Menu
-                            </button>
-                            <button onclick="showBusinessDataTab('pricing')" class="w-full text-left px-4 py-3 hover:bg-base-200 text-card-foreground">
-                                <i class="fas fa-dollar-sign mr-3"></i>Pricing
-                            </button>
-                            <button onclick="showBusinessDataTab('inventory')" class="w-full text-left px-4 py-3 hover:bg-base-200 text-card-foreground">
-                                <i class="fas fa-box mr-3"></i>Inventory
-                            </button>
-                            <button onclick="showBusinessDataTab('policies')" class="w-full text-left px-4 py-3 hover:bg-base-200 text-card-foreground">
-                                <i class="fas fa-gavel mr-3"></i>Policies & Rules
-                            </button>
-                        </nav>
-                    </div>
-                </div>
-
-                <!-- Content Area -->
-                <div class="lg:col-span-3">
-                    <!-- Hours Tab -->
-                    <div id="hours-tab" class="bg-card shadow-sm p-6 border-2 border-base-200">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-card-foreground">Hours & Schedule</h3>
-                            <button class="text-primary hover:text-primary/80 text-sm font-medium">
-                                <i class="fas fa-edit mr-2"></i>Edit Hours
-                            </button>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="grid grid-cols-7 gap-2 text-center">
-                                <div class="text-xs font-medium text-muted-foreground">MON</div>
-                                <div class="text-xs font-medium text-muted-foreground">TUE</div>
-                                <div class="text-xs font-medium text-muted-foreground">WED</div>
-                                <div class="text-xs font-medium text-muted-foreground">THU</div>
-                                <div class="text-xs font-medium text-muted-foreground">FRI</div>
-                                <div class="text-xs font-medium text-muted-foreground">SAT</div>
-                                <div class="text-xs font-medium text-muted-foreground">SUN</div>
-                                
-                                <div class="bg-success/10 p-3 border-2 border-success">
-                                    <div class="text-xs font-medium text-success-content">9AM-6PM</div>
-                                </div>
-                                <div class="bg-success/10 p-3 border-2 border-success">
-                                    <div class="text-xs font-medium text-success-content">9AM-6PM</div>
-                                </div>
-                                <div class="bg-success/10 p-3 border-2 border-success">
-                                    <div class="text-xs font-medium text-success-content">9AM-6PM</div>
-                                </div>
-                                <div class="bg-success/10 p-3 border-2 border-success">
-                                    <div class="text-xs font-medium text-success-content">9AM-6PM</div>
-                                </div>
-                                <div class="bg-error/10 p-3 border-2 border-error">
-                                    <div class="text-xs font-medium text-error-content">CLOSED</div>
-                                </div>
-                                <div class="bg-success/10 p-3 border-2 border-success">
-                                    <div class="text-xs font-medium text-success-content">9AM-4PM</div>
-                                </div>
-                                <div class="bg-error/10 p-3 border-2 border-error">
-                                    <div class="text-xs font-medium text-error-content">CLOSED</div>
-                                </div>
-                            </div>
-                            
-                            <div class="border-t pt-4">
-                                <h4 class="text-sm font-medium text-card-foreground mb-3">Upcoming Closures</h4>
-                                <div class="space-y-2">
-                                    <div class="flex items-center justify-between p-3 bg-warning/10 border-l-4 border-warning">
-                                        <div class="flex items-center">
-                                            <i class="fas fa-calendar-times text-warning mr-3"></i>
-                                            <div>
-                                                <p class="text-sm font-medium text-card-foreground">Private Event</p>
-                                                <p class="text-xs text-muted-foreground">Friday, Nov 22</p>
-                                            </div>
-                                        </div>
-                                        <button class="text-warning hover:text-warning/80">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Services Tab -->
-                    <div id="services-tab" class="bg-card shadow-sm p-6 border-2 border-base-200 hidden">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-card-foreground">Services / Menu</h3>
-                            <button class="bg-primary text-primary-content px-4 py-2 text-sm font-medium hover:bg-primary/90 transition">
-                                <i class="fas fa-plus mr-2"></i>Add Service
-                            </button>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="border-2 border-base-200 p-4 hover:shadow-md transition">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium text-card-foreground">Massage Therapy</h4>
-                                        <p class="text-sm text-muted-foreground">60 minutes - Full body relaxation</p>
-                                        <div class="flex items-center mt-2 text-xs text-muted-foreground">
-                                            <i class="fas fa-clock mr-1"></i>60 min
-                                            <span class="mx-2">•</span>
-                                            <i class="fas fa-dollar-sign mr-1"></i>120
-                                        </div>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="text-primary hover:text-primary/80">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-error hover:text-error/80">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border-2 border-base-200 p-4 hover:shadow-md transition">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium text-card-foreground">Full Facial</h4>
-                                        <p class="text-sm text-muted-foreground">90 minutes - Complete facial treatment</p>
-                                        <div class="flex items-center mt-2 text-xs text-muted-foreground">
-                                            <i class="fas fa-clock mr-1"></i>90 min
-                                            <span class="mx-2">•</span>
-                                            <i class="fas fa-dollar-sign mr-1"></i>120
-                                        </div>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="text-primary hover:text-primary/80">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-error hover:text-error/80">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border-2 border-base-200 p-4 hover:shadow-md transition">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium text-card-foreground">Hair Styling</h4>
-                                        <p class="text-sm text-muted-foreground">45 minutes - Cut and style</p>
-                                        <div class="flex items-center mt-2 text-xs text-muted-foreground">
-                                            <i class="fas fa-clock mr-1"></i>45 min
-                                            <span class="mx-2">•</span>
-                                            <i class="fas fa-dollar-sign mr-1"></i>80
-                                        </div>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="text-primary hover:text-primary/80">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-error hover:text-error/80">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pricing Tab -->
-                    <div id="pricing-tab" class="bg-white rounded-xl shadow-sm p-6 hidden">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900">Pricing</h3>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
-                                <i class="fas fa-plus mr-2"></i>Add Price Item
-                            </button>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="border rounded-lg p-4">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium text-gray-900">Massage Therapy</h4>
-                                        <p class="text-2xl font-bold text-blue-600 mt-1">$120</p>
-                                    </div>
-                                    <button class="text-blue-600 hover:text-blue-700">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="border rounded-lg p-4">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium text-gray-900">Full Facial</h4>
-                                        <p class="text-2xl font-bold text-blue-600 mt-1">$120</p>
-                                    </div>
-                                    <button class="text-blue-600 hover:text-blue-700">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="border rounded-lg p-4">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium text-gray-900">Hair Styling</h4>
-                                        <p class="text-2xl font-bold text-blue-600 mt-1">$80</p>
-                                    </div>
-                                    <button class="text-blue-600 hover:text-blue-700">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Inventory Tab -->
-                    <div id="inventory-tab" class="bg-white rounded-xl shadow-sm p-6 hidden">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900">Inventory</h3>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
-                                <i class="fas fa-plus mr-2"></i>Add Item
-                            </button>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="border rounded-lg p-4">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium text-gray-900">Massage Oil</h4>
-                                        <p class="text-sm text-gray-600">Lavender scented massage oil</p>
-                                        <div class="flex items-center mt-2">
-                                            <span class="text-sm font-medium text-green-600">In Stock: 15</span>
-                                            <span class="mx-2 text-gray-400">•</span>
-                                            <span class="text-sm text-gray-500">Reorder at: 5</span>
-                                        </div>
-                                    </div>
-                                    <button class="text-blue-600 hover:text-blue-700">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="border rounded-lg p-4">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h4 class="font-medium text-gray-900">Facial Cream</h4>
-                                        <p class="text-sm text-gray-600">Anti-aging facial treatment cream</p>
-                                        <div class="flex items-center mt-2">
-                                            <span class="text-sm font-medium text-yellow-600">Low Stock: 3</span>
-                                            <span class="mx-2 text-gray-400">•</span>
-                                            <span class="text-sm text-gray-500">Reorder at: 5</span>
-                                        </div>
-                                    </div>
-                                    <button class="text-blue-600 hover:text-blue-700">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Policies Tab -->
-                    <div id="policies-tab" class="bg-white rounded-xl shadow-sm p-6 hidden">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900">Policies & Rules</h3>
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
-                                <i class="fas fa-plus mr-2"></i>Add Policy
-                            </button>
-                        </div>
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="font-medium text-gray-900 mb-3">Cancellation Policy</h4>
-                                <div class="bg-gray-50 p-4 rounded-lg">
-                                    <p class="text-sm text-gray-700">Cancellations must be made at least 24 hours in advance. Late cancellations will be charged 50% of the service price.</p>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900 mb-3">Booking Rules</h4>
-                                <div class="bg-gray-50 p-4 rounded-lg">
-                                    <ul class="text-sm text-gray-700 space-y-2">
-                                        <li>• New clients require a credit card to hold appointments</li>
-                                        <li>• Same-day appointments subject to availability</li>
-                                        <li>• Group bookings require 48-hour notice</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-900 mb-3">How Chathy Responds</h4>
-                                <div class="bg-blue-50 p-4 rounded-lg">
-                                    <p class="text-sm text-gray-700 mb-2">Sample customer inquiry response:</p>
-                                    <div class="bg-white p-3 rounded border border-blue-200">
-                                        <p class="text-xs text-gray-600">"Hi! Thanks for reaching out. I can help you book an appointment. What service are you interested in and what day works best for you? Our hours are Mon-Thu 9AM-6PM, Sat 9AM-4PM. Please note we require 24-hour notice for cancellations. Looking forward to helping you!"</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- AI Settings Screen -->
-    <div id="ai-settings-screen" class="screen min-h-screen bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold text-gray-900">AI Settings</h2>
-                <p class="text-gray-600">Configure how Chathy interacts with your customers</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Channels -->
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Channels</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between p-4 border rounded-lg">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                                        <i class="fas fa-globe text-green-600"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-medium text-gray-900">Website Widget</h4>
-                                        <p class="text-sm text-gray-600">Chat bubble on your website</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-sm text-green-600">Active</span>
-                                    <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-4 border rounded-lg">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                        <i class="fas fa-sms text-blue-600"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-medium text-gray-900">SMS</h4>
-                                        <p class="text-sm text-gray-600">Text messaging with customers</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-sm text-green-600">Active</span>
-                                    <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-4 border rounded-lg">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                                        <i class="fab fa-facebook text-purple-600"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-medium text-gray-900">Facebook Messenger</h4>
-                                        <p class="text-sm text-gray-600">Facebook page messages</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-sm text-gray-500">Not Connected</span>
-                                    <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Connect</button>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-4 border rounded-lg">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center mr-4">
-                                        <i class="fab fa-instagram text-pink-600"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-medium text-gray-900">Instagram DMs</h4>
-                                        <p class="text-sm text-gray-600">Instagram direct messages</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-3">
-                                    <span class="text-sm text-gray-500">Not Connected</span>
-                                    <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Connect</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- AI Behavior -->
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">AI Behavior Settings</h3>
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Tone</label>
-                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                    <option value="friendly">Friendly</option>
-                                    <option value="formal">Formal</option>
-                                    <option value="concise">Concise</option>
-                                    <option value="detailed">Detailed</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <h4 class="text-sm font-medium text-gray-700 mb-3">Allowed Actions</h4>
-                                <div class="space-y-3">
-                                    <label class="flex items-center">
-                                        <input type="checkbox" checked class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                        <span class="ml-3 text-sm text-gray-700">Can book appointments</span>
-                                    </label>
-                                    <label class="flex items-center">
-                                        <input type="checkbox" checked class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                        <span class="ml-3 text-sm text-gray-700">Can cancel appointments</span>
-                                    </label>
-                                    <label class="flex items-center">
-                                        <input type="checkbox" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                        <span class="ml-3 text-sm text-gray-700">Can take payments</span>
-                                    </label>
-                                    <label class="flex items-center">
-                                        <input type="checkbox" checked class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                        <span class="ml-3 text-sm text-gray-700">Can recommend services</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Stats -->
-                <div class="space-y-6">
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Channel Performance</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex items-center justify-between mb-1">
-                                    <span class="text-sm text-gray-600">Website Widget</span>
-                                    <span class="text-sm font-medium text-gray-900">45</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 45%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex items-center justify-between mb-1">
-                                    <span class="text-sm text-gray-600">SMS</span>
-                                    <span class="text-sm font-medium text-gray-900">78</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-green-600 h-2 rounded-full" style="width: 78%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex items-center justify-between mb-1">
-                                    <span class="text-sm text-gray-600">Social Media</span>
-                                    <span class="text-sm font-medium text-gray-900">23</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 23%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Logs & Insights Screen -->
-    <div id="logs-screen" class="screen min-h-screen bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold text-gray-900">Logs & Insights</h2>
-                <p class="text-gray-600">Track Chathy's actions and performance</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Action Log -->
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Action Log</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start space-x-3 p-3 border-l-4 border-blue-500 bg-blue-50">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-clock text-blue-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm font-medium text-gray-900">Updated Business Hours</p>
-                                    <p class="text-xs text-gray-600">Friday marked as closed for private event</p>
-                                    <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3 p-3 border-l-4 border-green-500 bg-green-50">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-dollar-sign text-green-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm font-medium text-gray-900">Price Update</p>
-                                    <p class="text-xs text-gray-600">Full Facial price changed from $100 to $120</p>
-                                    <p class="text-xs text-gray-500 mt-1">5 hours ago</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3 p-3 border-l-4 border-purple-500 bg-purple-50">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-calendar text-purple-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm font-medium text-gray-900">New Appointment</p>
-                                    <p class="text-xs text-gray-600">Sarah booked Massage Therapy for tomorrow 10:00 AM</p>
-                                    <p class="text-xs text-gray-500 mt-1">Yesterday</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3 p-3 border-l-4 border-yellow-500 bg-yellow-50">
-                                <div class="flex-shrink-0">
-                                    <i class="fas fa-user-plus text-yellow-600"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="text-sm font-medium text-gray-900">New Customer</p>
-                                    <p class="text-xs text-gray-600">Mike Johnson added to customer database</p>
-                                    <p class="text-xs text-gray-500 mt-1">2 days ago</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Analytics Dashboard -->
-                <div class="space-y-6">
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Analytics</h3>
-                        <div class="space-y-4">
-                            <div class="text-center p-4 bg-blue-50 rounded-lg">
-                                <p class="text-2xl font-bold text-blue-600">24</p>
-                                <p class="text-sm text-gray-600">Customer Inquiries Today</p>
-                            </div>
-                            <div class="text-center p-4 bg-green-50 rounded-lg">
-                                <p class="text-2xl font-bold text-green-600">8</p>
-                                <p class="text-sm text-gray-600">Appointments Booked</p>
-                            </div>
-                            <div class="text-center p-4 bg-purple-50 rounded-lg">
-                                <p class="text-2xl font-bold text-purple-600">92%</p>
-                                <p class="text-sm text-gray-600">Update Accuracy</p>
-                            </div>
-                            <div class="text-center p-4 bg-yellow-50 rounded-lg">
-                                <p class="text-2xl font-bold text-yellow-600">3.5h</p>
-                                <p class="text-sm text-gray-600">Time Saved This Week</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h4 class="text-sm font-semibold text-gray-900 mb-3">Popular Services</h4>
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm text-gray-600">Massage Therapy</span>
-                                <span class="text-sm font-medium text-gray-900">45%</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm text-gray-600">Full Facial</span>
-                                <span class="text-sm font-medium text-gray-900">30%</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm text-gray-600">Hair Styling</span>
-                                <span class="text-sm font-medium text-gray-900">25%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
