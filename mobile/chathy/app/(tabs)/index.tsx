@@ -50,14 +50,14 @@ export default function DashboardScreen() {
       <Stack.Screen options={{ title: 'Dashboard' }} />
       <ScrollView className="flex-1 bg-background">
         <IBMMasthead />
-        <View className="p-6 space-y-8">
+        <View className="p-8 space-y-10">
           {/* Recent Updates Feed */}
           <Card>
             <CardHeader>
               <CardTitle>Recent Updates</CardTitle>
             </CardHeader>
-            <CardContent>
-              <View className="space-y-4">
+            <CardContent className="p-6">
+              <View className="space-y-6">
                 {RECENT_UPDATES.map((update) => (
                   <View key={update.id} className="flex-row items-start gap-3">
                     <View className="w-2 h-2 bg-primary rounded-full mt-2" />
@@ -74,12 +74,12 @@ export default function DashboardScreen() {
           </Card>
 
           {/* Business Snapshot */}
-          <View className="space-y-6">
+          <View className="space-y-8">
             <Text className="text-xl font-semibold">Business Snapshot</Text>
 
             {/* Hours Today */}
             <Card>
-              <CardContent className="pt-6">
+              <CardContent className="p-6">
                 <View className="flex-row items-center gap-3">
                   <Clock size={24} color="#0F62FE" />
                   <View>
@@ -98,8 +98,8 @@ export default function DashboardScreen() {
                   Next 5 Appointments
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <View className="space-y-2">
+              <CardContent className="p-6">
+                <View className="space-y-3">
                   {BUSINESS_SNAPSHOT.nextAppointments.map((appointment, index) => (
                     <Text key={index} variant="muted" className="text-sm">
                       • {appointment}
@@ -117,8 +117,8 @@ export default function DashboardScreen() {
                   Top Services This Week
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <View className="space-y-2">
+              <CardContent className="p-6">
+                <View className="space-y-3">
                   {BUSINESS_SNAPSHOT.topServices.map((service, index) => (
                     <Text key={index} variant="muted" className="text-sm">
                       • {service}
@@ -137,8 +137,8 @@ export default function DashboardScreen() {
                     Alerts
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <View className="space-y-2">
+                <CardContent className="p-6">
+                  <View className="space-y-3">
                     {BUSINESS_SNAPSHOT.alerts.map((alert, index) => (
                       <Text key={index} variant="muted" className="text-sm text-destructive">
                         • {alert}

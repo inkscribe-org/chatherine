@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Text } from './text';
 
 const messageBubbleVariants = cva(
-  'max-w-[80%] p-4 mb-4',
+  'max-w-[80%] p-4 mb-2',
   {
     variants: {
       variant: {

@@ -22,6 +22,11 @@ export default function TabLayout() {
         },
         tabBarActiveTintColor: theme.primary,
         tabBarInactiveTintColor: theme.mutedForeground,
+        tabBarLabelStyle: {
+          fontFamily: 'IBM Plex Sans',
+          fontSize: 12,
+          fontWeight: '500',
+        },
       }}
     >
       <Tabs.Screen

@@ -102,28 +102,28 @@ export default function ChatScreen() {
   };
 
   const renderMessage = ({ item }: { item: Message }) => (
-    <View className="mb-4">
+    <View className="mb-6">
       <MessageBubble
         message={item.text}
         timestamp={item.timestamp}
         variant={item.isSent ? 'sent' : 'received'}
       />
       {item.chathyResponse && item.isSent && (
-        <Card className="mt-4 mx-4">
-          <CardContent className="p-4">
-            <Text className="text-sm font-medium mb-2">What I understood:</Text>
+        <Card className="mt-4 mx-6">
+          <CardContent className="p-6">
+            <Text className="text-sm font-medium mb-3">What I understood:</Text>
             <Text variant="muted" className="text-sm mb-4">
               {item.chathyResponse.understood}
             </Text>
-            <Text className="text-sm font-medium mb-2">What I applied:</Text>
+            <Text className="text-sm font-medium mb-3">What I applied:</Text>
             <Text variant="muted" className="text-sm mb-4">
               {item.chathyResponse.applied}
             </Text>
             {item.chathyResponse.actions && (
               <>
-                <Text className="text-sm font-medium mb-2">Actions triggered:</Text>
+                <Text className="text-sm font-medium mb-3">Actions triggered:</Text>
                 {item.chathyResponse.actions.map((action, index) => (
-                  <Text key={index} variant="muted" className="text-sm mb-1">
+                  <Text key={index} variant="muted" className="text-sm mb-2">
                     • {action}
                   </Text>
                 ))}
@@ -141,7 +141,7 @@ export default function ChatScreen() {
         data={messages}
         keyExtractor={(item) => item.id}
         renderItem={renderMessage}
-        contentContainerStyle={{ padding: 16 }}
+        contentContainerStyle={{ padding: 24 }}
         showsVerticalScrollIndicator={false}
       />
       <ChatInput onSendMessage={handleSendMessage} />

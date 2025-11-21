@@ -22,7 +22,7 @@ function ChatInput({ onSendMessage, placeholder = 'Type a message...', className
   };
 
   return (
-    <View className={cn('flex-row items-center gap-2 p-4 border-t border-border bg-background', className)}>
+    <View className={cn('flex-row items-center gap-3 p-6 border-t border-border bg-background', className)}>
       <Input
         className="flex-1"
         value={message}
