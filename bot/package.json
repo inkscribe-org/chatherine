@@ -1,7 +1,7 @@
 {
   "name": "chathy-whatsapp-bot",
   "version": "1.0.0",
-  "description": "WhatsApp bot for business management with AI assistant",
+  "description": "Pure WhatsApp bot for business management with AI assistant",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

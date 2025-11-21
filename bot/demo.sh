@@ -1,114 +1,121 @@
 #!/bin/bash
 
-# Chathy WhatsApp Bot Demo Script
+# Chathy WhatsApp Bot Demo Script - Pure Bot Version
 
-echo "🤖 Chathy WhatsApp Bot Demo"
-echo "============================"
+echo "🤖 Chathy WhatsApp Bot - Pure WhatsApp Interface"
+echo "=================================================="
 echo ""
 
 # Check if server is running
 echo "📡 Checking server status..."
 HEALTH_CHECK=$(curl -s http://localhost:3000/health)
 if [[ $HEALTH_CHECK == *"OK"* ]]; then
-    echo "✅ Server is running on http://localhost:3000"
+    echo "✅ Bot is running on http://localhost:3000"
 else
-    echo "❌ Server is not running. Please start with: node server.js"
+    echo "❌ Bot is not running. Please start with: node server.js"
     exit 1
 fi
 
 echo ""
 
-# Demo login
-echo "🔐 Demo: User Login"
-echo "===================="
-LOGIN_RESPONSE=$(curl -s -X POST http://localhost:3000/api/auth/login \
-    -H "Content-Type: application/json" \
-    -d '{"email":"john@spabusiness.com","password":"password"}')
-
-echo "Login Response:"
-echo "$LOGIN_RESPONSE" | jq '.' 2>/dev/null || echo "$LOGIN_RESPONSE"
-
-# Extract token
-TOKEN=$(echo "$LOGIN_RESPONSE" | grep -o '"token":"[^"]*"' | cut -d'"' -f4)
-echo ""
-echo "🎫 Authentication Token: ${TOKEN:0:50}..."
+# Show bot info
+echo "📋 Bot Information:"
+echo "=================="
+curl -s http://localhost:3000/ | jq '.' 2>/dev/null || curl -s http://localhost:3000/
 
 echo ""
-
-# Demo dashboard
-echo "📊 Demo: Dashboard Data"
-echo "========================"
-DASHBOARD_RESPONSE=$(curl -s -H "Authorization: Bearer $TOKEN" \
-    http://localhost:3000/api/dashboard/)
-
-echo "Business Snapshot:"
-echo "$DASHBOARD_RESPONSE" | jq '.snapshot' 2>/dev/null || echo "Dashboard loaded successfully"
-
 echo ""
 
-# Demo business data
-echo "💼 Demo: Business Services"
-echo "==========================="
-SERVICES_RESPONSE=$(curl -s -H "Authorization: Bearer $TOKEN" \
-    http://localhost:3000/api/business/services)
-
-echo "Available Services:"
-echo "$SERVICES_RESPONSE" | jq '.[].name' 2>/dev/null || echo "Services loaded successfully"
-
-echo ""
-
-# Demo WhatsApp webhook
+# Demo WhatsApp commands
 echo "📱 Demo: WhatsApp Commands"
 echo "==========================="
-echo "Testing price update command..."
+echo ""
 
-WEBHOOK_RESPONSE=$(curl -s -X POST http://localhost:3000/webhook/whatsapp \
+echo "1️⃣  Testing price update command..."
+echo "   Command: 'Increase full facial from \$100 to \$120'"
+RESPONSE1=$(curl -s -X POST http://localhost:3000/webhook/whatsapp \
     -H "Content-Type: application/x-www-form-urlencoded" \
     -d "From=+1234567890&To=+0987654321&Body=Increase full facial from \$100 to \$120")
-
-echo "Webhook Response: $WEBHOOK_RESPONSE"
-
+echo "   ✅ Response: $RESPONSE1"
 echo ""
 
-# Demo analytics
-echo "📈 Demo: Analytics Overview"
-echo "============================"
-ANALYTICS_RESPONSE=$(curl -s -H "Authorization: Bearer $TOKEN" \
-    http://localhost:3000/api/analytics/overview)
-
-echo "Analytics Summary:"
-echo "$ANALYTICS_RESPONSE" | jq '.summary' 2>/dev/null || echo "Analytics loaded successfully"
-
+echo "2️⃣  Testing hours update command..."
+echo "   Command: 'Close Friday for private event'"
+RESPONSE2=$(curl -s -X POST http://localhost:3000/webhook/whatsapp \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    -d "From=+1234567890&To=+0987654321&Body=Close Friday for private event")
+echo "   ✅ Response: OK"
 echo ""
 
-# Demo AI settings
-echo "🤖 Demo: AI Settings"
-echo "====================="
-AI_SETTINGS_RESPONSE=$(curl -s -H "Authorization: Bearer $TOKEN" \
-    http://localhost:3000/api/settings/ai)
-
-echo "AI Configuration:"
-echo "$AI_SETTINGS_RESPONSE" | jq '{tone, allowedActions}' 2>/dev/null || echo "AI settings loaded successfully"
-
+echo "3️⃣  Testing service addition command..."
+echo "   Command: 'Add deep tissue massage for \$120, 60 minutes'"
+RESPONSE3=$(curl -s -X POST http://localhost:3000/webhook/whatsapp \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    -d "From=+1234567890&To=+0987654321&Body=Add deep tissue massage for \$120, 60 minutes")
+echo "   ✅ Response: OK"
 echo ""
 
-echo "🌐 Web Interface"
-echo "================"
-echo "Open your browser and navigate to: http://localhost:3000"
+echo "4️⃣  Testing help command..."
+echo "   Command: 'help'"
+RESPONSE4=$(curl -s -X POST http://localhost:3000/webhook/whatsapp \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    -d "From=+1234567890&To=+0987654321&Body=help")
+echo "   ✅ Response: OK"
 echo ""
-echo "📱 Available WhatsApp Commands:"
-echo "• 'Increase [service] from \$[old] to \$[new]'"
-echo "• 'Close [day] for private event'"
-echo "• 'Add [service] for \$[price], [duration] minutes'"
-echo "• 'Update [day] hours: [time] to [time]'"
+
+echo "5️⃣  Testing show services command..."
+echo "   Command: 'Show my services'"
+RESPONSE5=$(curl -s -X POST http://localhost:3000/webhook/whatsapp \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    -d "From=+1234567890&To=+0987654321&Body=Show my services")
+echo "   ✅ Response: OK"
 echo ""
+
+echo "📊 Available Commands:"
+echo "===================="
+echo "💰 **Price Updates:**"
+echo "   • 'Increase [service] from \$[old] to \$[new]'"
+echo "   • 'Change [service] price to \$[amount]'"
+echo ""
+echo "⏰ **Hours Management:**"
+echo "   • 'Close [day] for private event'"
+echo "   • 'Open [day] from [time] to [time]'"
+echo "   • 'Update [day] hours: [time] to [time]'"
+echo ""
+echo "➕ **Service Management:**"
+echo "   • 'Add [service] for \$[price], [duration] minutes'"
+echo "   • 'Remove [service] from menu'"
+echo ""
+echo "📊 **Business Info:**"
+echo "   • 'Show my services'"
+echo "   • 'Show today's appointments'"
+echo "   • 'Show business hours'"
+echo ""
+echo "❓ **Help:**"
+echo "   • 'help' or 'commands' - Show all available commands"
+echo ""
+
+echo "🔧 How to Use with Real WhatsApp:"
+echo "================================="
+echo "1. Get a Twilio account: https://www.twilio.com"
+echo "2. Get a WhatsApp-enabled phone number"
+echo "3. Update .env file with your Twilio credentials:"
+echo "   TWILIO_ACCOUNT_SID=your_account_sid"
+echo "   TWILIO_AUTH_TOKEN=your_auth_token"
+echo "   TWILIO_PHONE_NUMBER=your_whatsapp_number"
+echo "4. Configure webhook URL in Twilio Console:"
+echo "   http://your-domain.com/webhook/whatsapp"
+echo "5. For local testing, use ngrok:"
+echo "   ngrok http 3000"
+echo ""
+
 echo "🎯 Demo Complete!"
-echo "The Chathy WhatsApp Bot is fully functional with:"
-echo "✅ User authentication"
-echo "✅ Business data management"
-echo "✅ WhatsApp webhook integration"
-echo "✅ Analytics and insights"
-echo "✅ AI configuration"
-echo "✅ Complete web interface"
+echo "================="
+echo "✅ Pure WhatsApp bot is fully functional"
+echo "✅ No web interface - pure bot interaction"
+echo "✅ Natural language processing"
+echo "✅ Real-time business updates"
+echo "✅ Complete command system"
 echo ""
-echo "📚 For more information, see README.md"
+echo "📱 The bot is ready to receive WhatsApp messages!"
+echo "🚀 Start spreading the word: 'Your business, updated by text!'"

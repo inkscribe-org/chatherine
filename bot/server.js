@@ -5,12 +5,7 @@ const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth');
-const businessRoutes = require('./routes/business');
 const whatsappRoutes = require('./routes/whatsapp');
-const dashboardRoutes = require('./routes/dashboard');
-const analyticsRoutes = require('./routes/analytics');
-const settingsRoutes = require('./routes/settings');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,37 +19,40 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100 // limit each IP to 100 requests per windowMs
 });
-app.use('/api/', limiter);
+app.use('/webhook/', limiter);
 
 // Body parsing middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Static files
-app.use(express.static('public'));
-
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/business', businessRoutes);
-app.use('/api/whatsapp', whatsappRoutes);
-app.use('/api/dashboard', dashboardRoutes);
-app.use('/api/analytics', analyticsRoutes);
-app.use('/api/settings', settingsRoutes);
+// WhatsApp webhook route
+app.post('/webhook/whatsapp', whatsappRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    service: 'Chathy WhatsApp Bot'
+    service: 'Chathy WhatsApp Bot',
+    version: '1.0.0'
   });
 });
 
-// Webhook endpoint for Twilio
-app.post('/webhook/whatsapp', (req, res) => {
-  // This will be handled by the whatsapp routes
-  console.log('Webhook received:', req.body);
-  res.status(200).send('OK');
+// Root endpoint - bot info
+app.get('/', (req, res) => {
+  res.json({
+    bot: 'Chathy WhatsApp Bot',
+    description: 'Your business, updated by text.',
+    status: 'running',
+    webhook: '/webhook/whatsapp',
+    health: '/health',
+    commands: [
+      'Increase [service] from $[old] to $[new]',
+      'Close [day] for private event',
+      'Add [service] for $[price], [duration] minutes',
+      'Update [day] hours: [time] to [time]'
+    ]
+  });
 });
 
 // Error handling middleware
@@ -68,13 +66,16 @@ app.use((err, req, res, next) => {
 
 // 404 handler
 app.use('*', (req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+  res.status(404).json({ error: 'Endpoint not found' });
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Chathy WhatsApp Bot server running on port ${PORT}`);
+  console.log(`🤖 Chathy WhatsApp Bot running on port ${PORT}`);
   console.log(`📱 WhatsApp webhook: http://localhost:${PORT}/webhook/whatsapp`);
   console.log(`🔗 Health check: http://localhost:${PORT}/health`);
+  console.log(`📋 Bot info: http://localhost:${PORT}/`);
+  console.log('');
+  console.log('🚀 Bot is ready to receive WhatsApp messages!');
 });
 
 module.exports = app;
