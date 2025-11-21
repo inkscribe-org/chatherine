@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
 import { Button } from '@/components/ui/button';
 import { IBMMasthead } from '@/components/ui/ibm-masthead';
-import { AlertTriangle } from 'lucide-react-native';
+import { AlertTriangle, Clock, Pause, Plus, Package, MessageSquare } from 'lucide-react-native';
+import { Icon } from '@/components/ui/icon';
 
 const RECENT_UPDATES = [
   {
@@ -78,25 +79,30 @@ export default function DashboardScreen() {
              <CardHeader>
                <CardTitle>Quick Actions</CardTitle>
              </CardHeader>
-             <CardContent className="p-6">
-               <View className="flex-row flex-wrap gap-2">
-                 <Button variant="outline" size="sm" onPress={() => alert('Update today’s hours')}>
-                   <Text>Update today’s hours</Text>
-                 </Button>
-                 <Button variant="outline" size="sm" onPress={() => alert('Pause booking')}>
-                   <Text>Pause booking</Text>
-                 </Button>
-                 <Button variant="outline" size="sm" onPress={() => alert('Add a new service')}>
-                   <Text>Add a new service</Text>
-                 </Button>
-                 <Button variant="outline" size="sm" onPress={() => alert('Manage inventory item')}>
-                   <Text>Manage inventory item</Text>
-                 </Button>
-                 <Button variant="outline" size="sm" onPress={() => alert('Send a broadcast SMS')}>
-                   <Text>Send a broadcast SMS</Text>
-                 </Button>
-               </View>
-             </CardContent>
+              <CardContent className="p-6">
+                <View className="flex-col gap-3">
+                  <Button variant="outline" className="w-full flex-col items-center justify-center h-20" onPress={() => alert('Update today’s hours')}>
+                    <Icon as={Clock} size={24} className="mb-1" />
+                    <Text className="text-center text-xs">Update today’s hours</Text>
+                  </Button>
+                  <Button variant="outline" className="w-full flex-col items-center justify-center h-20" onPress={() => alert('Pause booking')}>
+                    <Icon as={Pause} size={24} className="mb-1" />
+                    <Text className="text-center text-xs">Pause booking</Text>
+                  </Button>
+                  <Button variant="outline" className="w-full flex-col items-center justify-center h-20" onPress={() => alert('Add a new service')}>
+                    <Icon as={Plus} size={24} className="mb-1" />
+                    <Text className="text-center text-xs">Add a new service</Text>
+                  </Button>
+                  <Button variant="outline" className="w-full flex-col items-center justify-center h-20" onPress={() => alert('Manage inventory item')}>
+                    <Icon as={Package} size={24} className="mb-1" />
+                    <Text className="text-center text-xs">Manage inventory item</Text>
+                  </Button>
+                  <Button variant="outline" className="w-full flex-col items-center justify-center h-20" onPress={() => alert('Send a broadcast SMS')}>
+                    <Icon as={MessageSquare} size={24} className="mb-1" />
+                    <Text className="text-center text-xs">Send a broadcast SMS</Text>
+                  </Button>
+                </View>
+              </CardContent>
            </Card>
 
            <View className="space-y-16 my-8 gap-8">

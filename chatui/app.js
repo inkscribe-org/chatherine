@@ -2,7 +2,6 @@
 let chatOpen = true;
 
 // Chat functionality
-let chatOpen = true;
 
 function toggleChat() {
     const chatInterface = document.getElementById('chat-interface');
@@ -45,17 +44,26 @@ const fakeAPIResponses = {
 };
 
 function sendMessage() {
+    console.log('sendMessage function called');
+    
     const input = document.getElementById('chat-input');
     const message = input.value.trim();
     
-    if (!message) return;
+    console.log('Message:', message);
+    
+    if (!message) {
+        console.log('No message provided');
+        return;
+    }
     
     // Prevent sending duplicate messages while loading
     if (document.getElementById('loading-indicator')) {
+        console.log('Loading indicator already exists');
         return;
     }
     
     const messagesContainer = document.getElementById('chat-messages');
+    console.log('Messages container found:', messagesContainer);
     
     // Add user message
     const userMessage = document.createElement('div');
@@ -75,11 +83,14 @@ function sendMessage() {
     input.disabled = true; // Disable input during loading
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     
+    console.log('User message added, now showing loading indicator');
+    
     // Show loading indicator
     showLoadingIndicator();
     
     // Simulate API call with loading - 5 seconds for realistic feel
     setTimeout(() => {
+        console.log('Timeout reached, removing loading indicator');
         removeLoadingIndicator();
         input.disabled = false; // Re-enable input
         input.focus(); // Focus back on input
@@ -89,7 +100,16 @@ function sendMessage() {
 }
 
 function showLoadingIndicator() {
+    console.log('showLoadingIndicator function called');
+    
     const messagesContainer = document.getElementById('chat-messages');
+    console.log('Messages container:', messagesContainer);
+    
+    if (!messagesContainer) {
+        console.error('Messages container not found!');
+        return;
+    }
+    
     const loadingIndicator = document.createElement('div');
     loadingIndicator.id = 'loading-indicator';
     loadingIndicator.className = 'flex items-start space-x-3';
@@ -104,11 +124,16 @@ function showLoadingIndicator() {
             </div>
         </div>
     `;
+    
+    console.log('Loading indicator HTML created');
     messagesContainer.appendChild(loadingIndicator);
+    console.log('Loading indicator appended to container');
+    
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     
     // Debug log
-    console.log('Loading indicator added');
+    console.log('Loading indicator added successfully');
+    console.log('Loading indicator element:', document.getElementById('loading-indicator'));
 }
 
 function removeLoadingIndicator() {
@@ -168,11 +193,25 @@ function addAIMessage(response) {
 
 
 
+// Test function for debugging loading indicator
+function testLoading() {
+    console.log('Test loading function called');
+    showLoadingIndicator();
+    
+    setTimeout(() => {
+        console.log('Test timeout reached');
+        removeLoadingIndicator();
+    }, 3000);
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded');
+    
     // Add enter key support for chat
     document.getElementById('chat-input').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
+            e.preventDefault();
             sendMessage();
         }
     });
