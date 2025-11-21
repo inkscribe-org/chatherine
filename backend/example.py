@@ -3,6 +3,10 @@ from ibm_watsonx_ai import APIClient
 from ibm_watsonx_ai import Credentials
 from ibm_watsonx_ai.foundation_models import ModelInference
 from ibm_watsonx_orchestrate.agent_builder.tools import tool
+import os
+dallas=os.environ.get("dallas")
+apikey=os.environ.get("apikey")
+pid=os.environ.get("pid")
 model_id = "ibm/granite-3-8b-instruct"
 space_id=None
 verify=False
