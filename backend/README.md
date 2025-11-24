@@ -8,7 +8,7 @@ With Chathy, business owners update their customer‑facing AI the same way they
 ## **🚀 Elevator Pitch**
 
 Chathy is the first “Text‑to‑Train” business assistant.  
-Small business owners update their AI by texting it directly through SMS or WhatsApp (e.g., *“We’re closed this Friday for a private event”*), and Chathy instantly updates its logic, schedule, and responses—automatically and securely—powered by IBM watsonx.ai and Watson Orchestrate.
+Small business owners update their AI by texting it directly through SMS or WhatsApp (e.g., *“We’re closed this Friday for a private event”*), and Chathy instantly updates its logic, schedule, and responses—automatically and securely—powered by Google Gemini AI and Watson Orchestrate.
 
 ---
 
@@ -51,7 +51,7 @@ And all of this is controlled through natural‑language text messages.
 
 ### **3\. Enterprise Reliability for Small Businesses**
 
-Powered by IBM’s secure AI stack, Chathy provides:
+Powered by Google's secure AI stack, Chathy provides:
 
 * Business-safe generation  
 * Reduced hallucinations  
@@ -61,14 +61,14 @@ Powered by IBM’s secure AI stack, Chathy provides:
 
 ## **🧠 Technology Stack**
 
-### **IBM watsonx.ai (Granite Models)**
+### **Google Gemini AI (gemini-2.0-flash)**
 
 * Interprets owner text messages  
 * Extracts structured meaning: hours, prices, availability, etc.  
 * Applies business-safe transformation rules to prevent hallucination  
 * Outputs standardized JSON updates
 
-### **IBM Watson Orchestrate**
+### **Backend Automation**
 
 The automation “nervous system”:
 
@@ -98,7 +98,7 @@ Messaging Gateway (Twilio / WhatsApp API)
     ↓  
 Chathy API  
     ↓  
-IBM watsonx.ai (Granite Model)  
+Google Gemini AI (Granite Model)  
     ↓          ↘  
 Watson Orchestrate → Tenant Data Store (Isolated, Secure)  
     ↓  

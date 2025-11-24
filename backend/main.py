@@ -7,7 +7,7 @@ from sqlalchemy import Column, Integer, String, select
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 import os
-from langchain_ibm import ChatWatsonx
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.tools import tool
 from dotenv import load_dotenv
@@ -173,8 +173,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Watson X AI setup
-watsonx_api_key = os.environ.get("WATSONX_API_KEY")
+# Gemini AI setup
+gemini_api_key = os.environ.get("GOOGLE_API_KEY")
 
 
 @app.on_event("startup")
@@ -290,7 +290,6 @@ class UnansweredQuestionModel(BaseModel):
 class ChatMessage(BaseModel):
     message: str
     customer_id: Optional[int] = None
-    api_key: Optional[str] = None
     api_key: Optional[str] = None
 
 
@@ -1536,18 +1535,17 @@ async def update_unanswered_question(
 async def chat(chat_message: ChatMessage):
     response_text = ""
     # Use API key from request if provided, otherwise fall back to environment variable
-    api_key = chat_message.api_key or watsonx_api_key
+    api_key = chat_message.api_key or gemini_api_key
     if not api_key:
         # Mock response for testing
         response_text = f"Got it! I've processed your request: '{chat_message.message}'. This is a mock response since LLM credentials are not configured."
     else:
         try:
-            llm = ChatWatsonx(
-                model="meta-llama/llama-3-70b-instruct",
-                watsonx_api_key=api_key,
-                watsonx_url="https://us-south.ml.cloud.ibm.com",
-                watsonx_project_id="your-project-id",
+            llm = ChatGoogleGenerativeAI(
+                model="gemini-2.0-flash",
+                google_api_key=api_key,
                 max_tokens=512,
+                temperature=0.7,
             )
 
             # Bind tools if customer_id is provided
@@ -1678,7 +1676,7 @@ Format your responses using Markdown for better readability:
                 response_text = response.content
 
         except Exception as e:
-            response_text = f"Got it! I've processed your request: '{chat_message.message}'. This is a mock response since LLM credentials are invalid or not configured. Error: {str(e)}"
+            response_text = f"Got it! I've processed your request: '{chat_message.message}'. This is a mock response since Gemini credentials are invalid or not configured. Error: {str(e)}"
 
     # Log the action
     try:
