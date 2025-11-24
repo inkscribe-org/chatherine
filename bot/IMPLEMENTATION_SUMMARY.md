@@ -1,4 +1,4 @@
-# 🎉 Chathy WhatsApp Bot - Implementation Complete!
+# 🎉 Chatherine WhatsApp Bot - Implementation Complete!
 
 ## ✅ What We've Built
 
@@ -133,7 +133,7 @@ The bot understands natural language commands like:
 
 1. **Start the server:**
    ```bash
-   cd /home/sigma/projects/repos/chathy/bot
+   cd /home/sigma/projects/repos/chatherine/bot
    node server.js
    ```
 

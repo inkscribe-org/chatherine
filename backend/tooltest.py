@@ -8,7 +8,7 @@ from langchain_core.tools import tool
 @tool
 def get_business_info() -> str:
     """Get basic business information."""
-    return "Business: Chathy Demo - AI Business Assistant"
+    return "Business: Chatherine Demo - AI Business Assistant"
 
 
 @tool

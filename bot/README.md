@@ -1,6 +1,6 @@
-# Chathy WhatsApp Bot
+# Chatherine WhatsApp Bot
 
-A comprehensive WhatsApp bot for business management with AI assistant capabilities. Chathy allows business owners to update their business information through natural language text messages.
+A comprehensive WhatsApp bot for business management with AI assistant capabilities. Chatherine allows business owners to update their business information through natural language text messages.
 
 ## Features
 
@@ -48,7 +48,7 @@ A comprehensive WhatsApp bot for business management with AI assistant capabilit
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd chathy/bot
+   cd chatherine/bot
    ```
 
 2. **Install dependencies**
@@ -178,7 +178,7 @@ The application includes a comprehensive web interface with the following screen
 - Alerts and notifications
 
 ### 3. Messaging Interface
-- Real-time chat interface with Chathy
+- Real-time chat interface with Chatherine
 - Message history and synchronization
 - Natural language input for business updates
 - AI response preview
@@ -261,9 +261,9 @@ MIT License - see LICENSE file for details
 
 For support and questions:
 - Create an issue in the repository
-- Email: support@chathy.com
-- Documentation: https://docs.chathy.com
+- Email: support@chatherine.com
+- Documentation: https://docs.chatherine.com
 
 ---
 
-**Chathy** - Your business, updated by text. 🤖✨
+**Chatherine** - Your business, updated by text. 🤖✨

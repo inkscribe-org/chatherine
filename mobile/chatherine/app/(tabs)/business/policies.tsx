@@ -19,7 +19,7 @@ const POLICIES = {
   },
 };
 
-const CHATHY_RESPONSES = [
+const CHATHERINE_RESPONSES = [
   {
     scenario: 'Customer asks to cancel appointment',
     response: 'I understand you need to cancel your appointment. According to our 24-hour policy, I can reschedule this for you. Would you like to book a new time?',
@@ -57,13 +57,13 @@ export default function PoliciesScreen() {
             </CardContent>
           </Card>
 
-          {/* Chathy Response Preview */}
+          {/* Chatherine Response Preview */}
           <Card>
             <CardHeader>
-              <CardTitle>"How Chathy Responds" Preview</CardTitle>
+              <CardTitle>"How Chatherine Responds" Preview</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {CHATHY_RESPONSES.map((item, index) => (
+              {CHATHERINE_RESPONSES.map((item, index) => (
                 <View key={index} className="border-l-2 border-primary pl-4">
                   <Text className="font-medium mb-1">{item.scenario}</Text>
                   <Text variant="muted" className="text-sm italic">
@@ -80,7 +80,7 @@ export default function PoliciesScreen() {
               <CardContent className="p-4">
                 <Text className="font-medium mb-2">Quick Policy Updates</Text>
                 <Text variant="muted" className="text-sm mb-3">
-                  Text Chathy to update policies: "Change cancellation to 48 hours" or "Update late policy to 10 minutes"
+                  Text Chatherine to update policies: "Change cancellation to 48 hours" or "Update late policy to 10 minutes"
                 </Text>
                 <Text className="text-sm">
                   💡 Tip: Policy changes are automatically applied to your booking system and customer communications.

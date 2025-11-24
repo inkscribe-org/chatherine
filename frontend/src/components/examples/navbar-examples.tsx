@@ -271,7 +271,7 @@ export function WatsonProbeNavbar() {
           <div className="flex items-center space-x-16 m-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-primary mr-10"></div>
-              <NavbarBrand href="#" className="text-xl font-semibold p-0">Chathy</NavbarBrand>
+              <NavbarBrand href="#" className="text-xl font-semibold p-0">Chatherine</NavbarBrand>
             </div>
           </div>
           <div className="flex items-center space-x-8">

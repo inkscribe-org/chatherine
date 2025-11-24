@@ -12,7 +12,7 @@ type Message = {
   text: string;
   isSent: boolean;
   timestamp: string;
-  chathyResponse?: {
+  chatherineResponse?: {
     understood: string;
     applied: string;
     actions?: string[];
@@ -35,20 +35,20 @@ export default function ChatScreen() {
 
     try {
       const data = await api.chat.sendMessage(text);
-      const chathyReply: Message = {
+      const chatherineReply: Message = {
         id: (Date.now() + 1).toString(),
         text: data.response,
         isSent: false,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-      setMessages(prev => [...prev, chathyReply]);
+      setMessages(prev => [...prev, chatherineReply]);
     } catch (error) {
       const errorReply: Message = {
         id: (Date.now() + 1).toString(),
         text: 'Sorry, I couldn\'t process your request. Please try again.',
         isSent: false,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        chathyResponse: {
+        chatherineResponse: {
           understood: 'Failed to process request',
           applied: 'No action taken',
           error: error.message,
@@ -70,43 +70,43 @@ export default function ChatScreen() {
         timestamp={item.timestamp}
         variant={item.isSent ? 'sent' : 'received'}
       />
-      {item.chathyResponse && item.isSent && (
+      {item.chatherineResponse && item.isSent && (
         <Card className="mt-4 mx-6">
           <CardContent className="p-6">
             <View className="flex-row items-center gap-2 mb-3">
-              {item.chathyResponse.success === false ? (
+              {item.chatherineResponse.success === false ? (
                 <AlertCircle size={20} color="#EF4444" />
               ) : (
                 <CheckCircle size={20} color="#10B981" />
               )}
               <Text className="text-sm font-medium">
-                {item.chathyResponse.success === false ? 'Action Failed' : 'Action Completed'}
+                {item.chatherineResponse.success === false ? 'Action Failed' : 'Action Completed'}
               </Text>
             </View>
             
             <Text className="text-sm font-medium mb-3">What I understood:</Text>
             <Text variant="muted" className="text-sm mb-4">
-              {item.chathyResponse.understood}
+              {item.chatherineResponse.understood}
             </Text>
             
             <Text className="text-sm font-medium mb-3">What I applied:</Text>
             <Text variant="muted" className="text-sm mb-4">
-              {item.chathyResponse.applied}
+              {item.chatherineResponse.applied}
             </Text>
             
-            {item.chathyResponse.error && (
+            {item.chatherineResponse.error && (
               <>
                 <Text className="text-sm font-medium mb-3 text-red-600">Error:</Text>
                 <Text variant="muted" className="text-sm mb-4 text-red-600">
-                  {item.chathyResponse.error}
+                  {item.chatherineResponse.error}
                 </Text>
               </>
             )}
             
-            {item.chathyResponse.actions && (
+            {item.chatherineResponse.actions && (
               <>
                 <Text className="text-sm font-medium mb-3">Actions triggered:</Text>
-                {item.chathyResponse.actions.map((action, index) => (
+                {item.chatherineResponse.actions.map((action, index) => (
                   <Text key={index} variant="muted" className="text-sm mb-2">
                     • {action}
                   </Text>

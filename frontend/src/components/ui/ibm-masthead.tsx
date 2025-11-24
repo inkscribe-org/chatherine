@@ -20,7 +20,7 @@ export function IBMMasthead() {
             <div className="w-8 h-8 bg-primary rounded-sm flex items-center justify-center text-primary-content font-bold text-sm">
               C
             </div>
-            Chathy
+            Chatherine
           </div>
         </NavbarBrand>
       </NavbarSection>

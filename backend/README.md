@@ -1,14 +1,14 @@
-# **Chathy – Text‑to‑Train AI for Small Business**
+# **Chatherine – Text‑to‑Train AI for Small Business**
 
-Chathy is an enterprise‑grade, self‑maintaining AI assistant built specifically for small business owners who don’t have time for dashboards, knowledge base editors, or manual chatbot configuration.  
-With Chathy, business owners update their customer‑facing AI the same way they talk to their customers—by simply sending a text message.
+Chatherine is an enterprise‑grade, self‑maintaining AI assistant built specifically for small business owners who don't have time for dashboards, knowledge base editors, or manual chatbot configuration.  
+With Chatherine, business owners update their customer‑facing AI the same way they talk to their customers—by simply sending a text message.
 
 ---
 
 ## **🚀 Elevator Pitch**
 
-Chathy is the first “Text‑to‑Train” business assistant.  
-Small business owners update their AI by texting it directly through SMS or WhatsApp (e.g., *“We’re closed this Friday for a private event”*), and Chathy instantly updates its logic, schedule, and responses—automatically and securely—powered by Google Gemini AI and Watson Orchestrate.
+Chatherine is the first “Text‑to‑Train” business assistant.  
+Small business owners update their AI by texting it directly through SMS or WhatsApp (e.g., *“We’re closed this Friday for a private event”*), and Chatherine instantly updates its logic, schedule, and responses—automatically and securely—powered by Google Gemini AI and Watson Orchestrate.
 
 ---
 
@@ -25,21 +25,21 @@ This creates the Maintenance Gap—the disconnect between the owner’s real bus
 
 ---
 
-## **✨ The Chathy Solution**
+## **✨ The Chatherine Solution**
 
 ### **1\. Text‑to‑Train (Dynamic Ingestion)**
 
-Business owners talk to Chathy just like texting an employee:
+Business owners talk to Chatherine just like texting an employee:
 
 * “Our facial treatment is now $120.”  
 * “We’re adding pumpkin muffins back to the menu.”  
 * “Dentist Patel is unavailable next Thursday.”
 
-Chathy interprets the update, structures it, and updates the bot’s behavior immediately.
+Chatherine interprets the update, structures it, and updates the bot’s behavior immediately.
 
 ### **2\. Action-Oriented AI**
 
-Chathy isn’t just a FAQ chatbot. It can:
+Chatherine isn’t just a FAQ chatbot. It can:
 
 * Update schedules  
 * Modify inventory or menus  
@@ -51,7 +51,7 @@ And all of this is controlled through natural‑language text messages.
 
 ### **3\. Enterprise Reliability for Small Businesses**
 
-Powered by Google's secure AI stack, Chathy provides:
+Powered by Google's secure AI stack, Chatherine provides:
 
 * Business-safe generation  
 * Reduced hallucinations  
@@ -96,7 +96,7 @@ Owner (SMS/WhatsApp)
     ↓  
 Messaging Gateway (Twilio / WhatsApp API)  
     ↓  
-Chathy API  
+Chatherine API  
     ↓  
 Google Gemini AI (Granite Model)  
     ↓          ↘  
@@ -126,14 +126,14 @@ These organizations value:
 * Compliance-ready infrastructure  
 * Hands-off maintenance
 
-Chathy delivers all of this without requiring any technical expertise.
+Chatherine delivers all of this without requiring any technical expertise.
 
 ---
 
 ## **💵 Business Model**
 
 Subscription: $100–$300/month per business  
-Chathy sells automation, not just chatbot responses.
+Chatherine sells automation, not just chatbot responses.
 
 Value delivered:
 
@@ -148,8 +148,8 @@ A single enterprise-grade IBM license operates thousands of tenant bots, ensurin
 
 ## **📌 Summary**
 
-Chathy eliminates the single biggest failure point of small-business AI: maintenance.  
-By converting simple text messages into automated workflows, Chathy becomes the always-updated, always-accurate digital assistant that small business owners have needed for years.
+Chatherine eliminates the single biggest failure point of small-business AI: maintenance.  
+By converting simple text messages into automated workflows, Chatherine becomes the always-updated, always-accurate digital assistant that small business owners have needed for years.
 
 If you'd like, I can also generate:  
 ✅ A visual diagram for the README  

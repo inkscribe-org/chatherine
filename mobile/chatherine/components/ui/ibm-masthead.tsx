@@ -12,7 +12,7 @@ export function IBMMasthead() {
         <View className="w-8 h-8 bg-primary rounded-sm flex items-center justify-center mr-2">
           <Text className="text-primary-foreground font-bold text-sm">C</Text>
         </View>
-        <Text className="text-xl font-semibold">Chathy</Text>
+        <Text className="text-xl font-semibold">Chatherine</Text>
       </View>
 
       <View className="flex-row items-center space-x-2">

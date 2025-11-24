@@ -61,7 +61,7 @@ app.get('/health', (req, res) => {
   res.status(200).json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    service: 'Chathy Telegram Bot',
+    service: 'Chatherine Telegram Bot',
     version: '1.0.0'
   });
 });
@@ -69,7 +69,7 @@ app.get('/health', (req, res) => {
 // Root endpoint - bot info
 app.get('/', (req, res) => {
   res.json({
-    bot: 'Chathy Telegram Bot',
+    bot: 'Chatherine Telegram Bot',
     description: 'Your business, updated by text.',
     status: 'running',
     webhook: '/webhook/telegram',
@@ -98,7 +98,7 @@ app.use('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🤖 Chathy Telegram Bot running on port ${PORT}`);
+  console.log(`🤖 Chatherine Telegram Bot running on port ${PORT}`);
   console.log(`📱 Telegram webhook: http://localhost:${PORT}/webhook/telegram`);
   console.log(`🔗 Health check: http://localhost:${PORT}/health`);
   console.log(`📋 Bot info: http://localhost:${PORT}/`);

@@ -345,7 +345,7 @@ router.get('/integrations', authMiddleware, (req, res) => {
       {
         id: 'website',
         name: 'Website Widget',
-        description: 'Add Chathy to your website',
+        description: 'Add Chatherine to your website',
         connected: true,
         lastSync: null,
         settings: {

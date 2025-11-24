@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "chathy",
-    "slug": "chathy",
+    "name": "chatherine",
+    "slug": "chatherine",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "chathy",
+    "scheme": "chatherine",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {

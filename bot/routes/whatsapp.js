@@ -112,7 +112,7 @@ const generateAIResponse = (message, businessId) => {
   
   // Help command
   if (lowerMessage.includes('help') || lowerMessage.includes('commands')) {
-    return `🤖 **Chathy Bot Commands:**
+    return `🤖 **Chatherine Bot Commands:**
     
 💰 **Price Updates:**
 • "Increase [service] from $[old] to $[new]"
@@ -172,7 +172,7 @@ router.post('/', (req, res) => {
   const user = users.find(u => u.phone === from);
 
   if (!user) {
-    const welcomeMsg = `👋 Welcome to Chathy!
+    const welcomeMsg = `👋 Welcome to Chatherine!
 
 I'm your AI business assistant. I can help you update your business information through simple text messages.
 

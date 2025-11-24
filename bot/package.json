@@ -1,5 +1,5 @@
 {
-  "name": "chathy-telegram-bot",
+  "name": "chatherine-telegram-bot",
   "version": "1.0.0",
   "description": "Pure Telegram bot for business management with AI assistant",
   "main": "server.js",
@@ -32,8 +32,8 @@
     "bot",
     "business",
     "ai",
-    "chathy"
+    "chatherine"
   ],
-  "author": "Chathy Team",
+  "author": "Chatherine Team",
   "license": "MIT"
 }

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Chathy WhatsApp Bot Demo Script - Pure Bot Version
+# Chatherine WhatsApp Bot Demo Script - Pure Bot Version
 
-echo "🤖 Chathy WhatsApp Bot - Pure WhatsApp Interface"
+echo "🤖 Chatherine WhatsApp Bot - Pure WhatsApp Interface"
 echo "=================================================="
 echo ""
 
