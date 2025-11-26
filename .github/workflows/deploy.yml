@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout landing branch
+      - name: Checkout landing source
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -26,15 +26,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build static site (Next.js output: export)
+      - name: Build static export
         run: |
           npm run build
+          # next.js writes export to ./out when output: export is on
+          ls -la out
           touch out/.nojekyll
 
-      - name: Push to gh-pages
+      - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
           publish_dir: ./out
-          force_orphan: true
+          publish_branch: gh-pages
+          force_orphan: false
