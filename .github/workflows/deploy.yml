@@ -26,10 +26,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build and export
+      - name: Build static site (Next.js output: export)
         run: |
           npm run build
-          npm run export
           touch out/.nojekyll
 
       - name: Push to gh-pages
