@@ -1,5 +1,5 @@
 
-Project Summary
+oProject Summary
 
 Chatherine is an enterprise‑grade AI assistant designed for small business owners who struggle with maintaining digital tools. Instead of logging into dashboards or editing knowledge bases, business owners update their AI assistant simply by sending a message through Telegram. Chatherine instantly updates itself using Google Gemini AI and automation.
 The Issue We Are Hoping to Solve
