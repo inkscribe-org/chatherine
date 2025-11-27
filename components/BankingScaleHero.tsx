@@ -63,11 +63,10 @@ const generateDataPoints = (): DataPoint[] => {
 
 // @component: BankingScaleHero
 export const BankingScaleHero = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible] = useState(true);
   const [dataPoints] = useState<DataPoint[]>(generateDataPoints());
   const [typingComplete, setTypingComplete] = useState(false);
   useEffect(() => {
-    setIsVisible(true);
     const timer = setTimeout(() => setTypingComplete(true), 1000);
     return () => clearTimeout(timer);
   }, []);

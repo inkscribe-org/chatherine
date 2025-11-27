@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 type CaseStudy = {
   id: string;
@@ -513,10 +513,11 @@ const FeatureBadge = ({ name }: { name: string }) => {
     </div>
   );
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SlackCallCard = ({
-  accentColor,
-  delay,
-  zIndex,
+  accentColor: _accentColor,
+  delay: _delay,
+  zIndex: _zIndex,
 }: {
   accentColor: string;
   delay: number;
@@ -524,10 +525,11 @@ const SlackCallCard = ({
 }) => {
   return null;
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MeetingTranscriptCard = ({
-  accentColor,
-  delay,
-  zIndex,
+  accentColor: _accentColor,
+  delay: _delay,
+  zIndex: _zIndex,
 }: {
   accentColor: string;
   delay: number;
@@ -535,17 +537,7 @@ const MeetingTranscriptCard = ({
 }) => {
   return null;
 };
-const SentimentReportCard = ({
-  accentColor,
-  delay,
-  zIndex,
-}: {
-  accentColor: string;
-  delay: number;
-  zIndex: number;
-}) => {
-  return null;
-};
+
 const NotionCollaborationCard = ({
   accentColor,
   delay,
@@ -826,12 +818,16 @@ export const CaseStudiesCarousel = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const currentStudy = caseStudies[currentIndex];
-  const startAutoPlay = () => {
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % caseStudies.length);
+  };
+  const startAutoPlay = useCallback(() => {
     if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     autoPlayRef.current = setInterval(() => {
       nextSlide();
     }, 5000);
-  };
+  }, []);
   const stopAutoPlay = () => {
     if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
@@ -845,11 +841,7 @@ export const CaseStudiesCarousel = () => {
       stopAutoPlay();
     }
     return () => stopAutoPlay();
-  }, [isAutoPlaying, currentIndex]);
-  const nextSlide = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % caseStudies.length);
-  };
+  }, [isAutoPlaying, currentIndex, startAutoPlay]);
   const prevSlide = () => {
     setDirection(-1);
     setCurrentIndex(
@@ -953,7 +945,7 @@ export const CaseStudiesCarousel = () => {
                       fontFamily: "var(--font-figtree), Figtree",
                     }}
                   >
-                    "{currentStudy.quote}"
+                    &quot;{currentStudy.quote}&quot;
                   </p>
                   <footer
                     className="text-sm text-muted-foreground"

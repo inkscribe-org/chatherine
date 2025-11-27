@@ -3,7 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-const navigationLinks = [
+
+type NavLink = {
+  name: string;
+  href: string;
+};
+
+const navigationLinks: NavLink[] = [
   {
     name: "Features",
     href: "#features",
@@ -20,7 +26,7 @@ const navigationLinks = [
     name: "Resources",
     href: "#resources",
   },
-] as any[];
+];
 
 // @component: PortfolioNavbar
 export const PortfolioNavbar = () => {
