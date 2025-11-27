@@ -3,9 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 import uvicorn
-from sqlalchemy import Column, Integer, String, select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
+from contextlib import asynccontextmanager
 import os
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
@@ -160,27 +161,44 @@ class UnansweredQuestion(Base):
     response: Mapped[Optional[str]] = mapped_column()  # Owner's response when answered
 
 
-engine = create_async_engine("sqlite+aiosqlite:///./customers.db", echo=True)
-async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
-
-app = FastAPI(title="Simple API", version="1.0.0")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 # Gemini AI setup
 gemini_api_key = os.environ.get("GOOGLE_API_KEY")
 
 
-@app.on_event("startup")
-async def create_tables():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Create database tables
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+    yield
+    # Shutdown: Add cleanup logic here if needed
+
+
+engine = create_async_engine("sqlite+aiosqlite:///./customers.db", echo=True)
+async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
+
+app = FastAPI(title="Simple API", version="1.0.0", lifespan=lifespan)
+
+# CORS configuration - restrict to specific origins for security
+origins = [
+    "http://localhost:3000",  # Frontend dev server
+    "http://localhost:3001",  # Bot dev server
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",
+    "https://localhost:3000",
+    "https://localhost:3001",
+    # Add production domains here when deployed
+    # "https://yourdomain.com",
+    # "https://app.yourdomain.com",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 
 class CustomerModel(BaseModel):

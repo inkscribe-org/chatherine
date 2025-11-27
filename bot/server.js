@@ -15,33 +15,55 @@ console.log('Auth routes loaded:', typeof authRoutes);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security middleware (temporarily disabled for testing)
-// app.use(helmet());
-app.use(cors());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https:"],
+    },
+  },
+}));
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://yourdomain.com', 'https://app.yourdomain.com'] // TODO: Replace with chatherine's real domain
+    : ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001'],
+  credentials: true
+}));
 
 // Body parsing middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Rate limiting (temporarily disabled for testing)
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000, // 15 minutes
-//   max: 100 // limit each IP to 100 requests per windowMs
-// });
-// app.use('/webhook/', limiter);
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, 
+  max: 100,
+  message: {
+    error: 'Too many requests from this IP, please try again later.'
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use('/api/', limiter);
+
+const webhookLimiter = rateLimit({
+  windowMs: 60 * 1000, 
+  max: 10, 
+  message: {
+    error: 'Too many webhook requests, please try again later.'
+  }
+});
+app.use('/webhook/', webhookLimiter);
 
 
 
-// Telegram webhook route
 app.use('/webhook/telegram', telegramRoutes);
-
-// Auth API routes
 app.use('/api/auth', authRoutes);
-
-// Business API routes
 app.use('/api/business', businessRoutes);
 
-// Chat API proxy to backend
 app.post('/api/chat', async (req, res) => {
   try {
     const axios = require('axios');
@@ -56,7 +78,6 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-// Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ 
     status: 'OK', 
@@ -66,7 +87,6 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Root endpoint - bot info
 app.get('/', (req, res) => {
   res.json({
     bot: 'Chatherine Telegram Bot',
@@ -83,7 +103,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ 
@@ -92,18 +111,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({ error: 'Endpoint not found' });
 });
 
 app.listen(PORT, () => {
-  console.log(`🤖 Chatherine Telegram Bot running on port ${PORT}`);
-  console.log(`📱 Telegram webhook: http://localhost:${PORT}/webhook/telegram`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/health`);
-  console.log(`📋 Bot info: http://localhost:${PORT}/`);
-  console.log('');
-  console.log('🚀 Bot is ready to receive Telegram messages!');
+    console.log("bot running on telegram")
 });
 
 module.exports = app;
